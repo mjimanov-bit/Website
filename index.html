@@ -1,24 +1,698 @@
-lass="container about-wrap">
-      <div>
-        <span class="eyebrow mono"><span class="n">02</span> who-i-am</span>
-        <h2 class="title">I'm Michael Zhymanov.</h2>
-        <div class="lead">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Parralax — Machine Learning Development for Companies</title>
+<meta name="description" content="Parralax is a freelance machine-learning studio run by Michael Zhymanov. We convert unstructured data into organized, trained ML models for companies." />
+<link rel="canonical" href="https://parralax.dev/" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e0e11'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='24' font-weight='700' text-anchor='middle' fill='%23e8eaec'%3Epx%3C/text%3E%3Crect x='42' y='31' width='7' height='2' rx='1' fill='%233fd39e'/%3E%3C/svg%3E" />
+
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-alt: #101014;
+    --surface: #16161a;
+    --border: #26262c;
+    --text: #e9eaec;
+    --muted: #9aa1a8;
+    --faint: #5d646c;
+    --accent: #3fd39e;
+    --accent-ink: #062a1e;
+    --maxw: 960px;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 66px;
+  }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .mono {
+    font-family: var(--mono);
+  }
+
+  /* ---------- header ---------- */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 12, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    font-family: var(--mono);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .brand:hover {
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .brand .dot {
+    color: var(--accent);
+  }
+
+  .brand .caret {
+    color: var(--accent);
+    animation: blink 1.2s steps(2, start) infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 15px;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-links .cta {
+    color: var(--accent);
+    border: 1px solid #1f906a;
+    border-radius: 6px;
+    padding: 6px 14px;
+  }
+
+  .nav-links .cta:hover {
+    background: rgba(63, 211, 158, 0.12);
+    color: var(--accent);
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 14px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    padding: 110px 0 90px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -160px;
+    top: -160px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(
+      circle,
+      rgba(63, 211, 158, 0.16) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .hero .container {
+    position: relative;
+    text-align: center;
+  }
+
+  .hero-line {
+    display: block;
+    margin: 0 auto 16px;
+    width: fit-content;
+    font-size: 13px;
+    color: var(--faint);
+  }
+
+  .hero-line .p {
+    color: var(--accent);
+  }
+
+  .hero h1 {
+    margin: 0 0 18px;
+    font-size: clamp(38px, 6.5vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 .accent {
+    color: var(--accent);
+  }
+
+  .hero > .container > p {
+    margin: 0 auto 34px;
+    max-width: 48ch;
+    color: var(--muted);
+    font-size: 18px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .btn {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .btn-primary:hover {
+    background: #58e2ac;
+  }
+
+  .btn-ghost {
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ---------- sections ---------- */
+
+  .section {
+    padding: 84px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section.alt {
+    background: var(--bg-alt);
+  }
+
+  .eyebrow {
+    display: block;
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: var(--faint);
+  }
+
+  .eyebrow .n {
+    color: var(--accent);
+  }
+
+  h1.title,
+  h2.title {
+    margin: 0 0 16px;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .lead {
+    margin: 0 0 32px;
+    max-width: 62ch;
+    color: var(--muted);
+  }
+
+  .lead p + p {
+    margin-top: 14px;
+  }
+
+  .lead p {
+    margin: 0 0 14px;
+  }
+
+  .lead p:last-child {
+    margin-bottom: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    color: var(--text);
+    display: block;
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .card .tag {
+    margin: 0 0 8px;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+  }
+
+  .card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .list-x {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+    max-width: 62ch;
+  }
+
+  .list-x li {
+    display: flex;
+    gap: 10px;
+    color: var(--muted);
+  }
+
+  .list-x li::before {
+    content: ">";
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  /* ---------- about ---------- */
+
+  .about-wrap {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chips span {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 6px 12px;
+  }
+
+  /* ---------- contact ---------- */
+
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    transition: border-color 0.15s ease;
+  }
+
+  .contact-card:hover {
+    border-color: var(--accent);
+  }
+
+  .contact-card .label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    color: var(--faint);
+    font-family: var(--mono);
+  }
+
+  .contact-card .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    word-break: break-word;
+  }
+
+  .contact-card .ico {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+
+  /* ---------- footer ---------- */
+
+  .site-footer {
+    padding: 36px 0;
+    background: var(--bg-alt);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 24px;
+  }
+
+  .footer-inner p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--faint);
+  }
+
+  .footer-inner a {
+    font-size: 13px;
+    color: var(--faint);
+  }
+
+  .footer-inner a:hover {
+    color: var(--accent);
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 720px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-wrap,
+    .contact-wrap {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .nav-toggle {
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 62px;
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 10px 24px 18px;
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .nav-links li {
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .nav-links li:last-child {
+      border: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 12px 0;
+      color: var(--text);
+    }
+
+    .nav-links .cta {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .hero {
+      padding: 80px 0 64px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .brand .caret {
+      animation: none;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#top">
+      parralax<span class="dot">.</span>dev<span class="caret" aria-hidden="true">_</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-links"
+    >
+      Menu
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#what">What We Do</a></li>
+      <li><a href="#about">Who I Am</a></li>
+      <li><a class="cta" href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ HERO / HOME ============ -->
+
+  <section class="hero" id="top">
+    <div class="container">
+
+      <span class="hero-line mono">
+        <span class="p">~/</span> freelance-machine-learning-studio
+      </span>
+
+      <h1>
+        Unstructured Data Into
+        <span class="accent">Machine Learning.</span>
+      </h1>
+
+      <p>
+        Parralax converts the data your company already has —
+        spreadsheets, logs, free text, images — into organized,
+        trained ML models you can actually use.
+      </p>
+
+      <div class="buttons">
+        <a class="btn btn-primary" href="#contact">Contact Me</a>
+        <a class="btn btn-ghost" href="#what">What We Do</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============ WHAT WE DO ============ -->
+
+  <section class="section" id="what">
+    <div class="container">
+
+      <span class="eyebrow mono">
+        <span class="n">01</span> what-we-do
+      </span>
+
+      <h2 class="title">
+        We convert unstructured data into organized machine-learning models.
+      </h2>
+
+      <p class="lead">
+        Most companies sit on unstructured data that has value but isn't usable —
+        messy exports, free text, image archives, logs. Parralax turns that into
+        organized datasets, trained models, and working predictions, detections,
+        or classifications.
+      </p>
+
+      <div class="grid">
+
+        <div class="card">
+          <span class="tag mono">data</span>
+          <h3>Data Organization</h3>
           <p>
-            I'm a freelance machine-learning developer and the founder of Parralax. I work
-            through the whole pipeline: understanding the problem, preparing data, building and
-            training the model, evaluating it, and getting it to where it's actually usable.
-          </p>
-          <p>
-            I've built language models from scratch, object-detection systems with YOLO, and
-            image models with CNNs — trained on real data, not just tutorials.
-          </p>
-          <p>
-            Parralax is one developer, not an agency. That means you talk directly to the person
-            doing the work, and every part of your project is handled by the same engineer who
-            built it.
+            Cleaning, organizing, and labeling your data so a model can
+            actually learn from it.
           </p>
         </div>
+
+        <div class="card">
+          <span class="tag mono">model</span>
+          <h3>Model Development</h3>
+          <p>
+            Custom models — language models, computer vision, predictive
+            models — trained on your data.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="tag mono">deploy</span>
+          <h3>Deployment &amp; Results</h3>
+          <p>
+            Training, evaluation, and getting the model running so your
+            company actually uses it.
+          </p>
+        </div>
+
       </div>
+    </div>
+  </section>
+
+
+  <!-- ============ WHO I AM ============ -->
+
+  <section class="section alt" id="about">
+    <div class="container about-wrap">
+
+      <div>
+
+        <span class="eyebrow mono">
+          <span class="n">02</span> who-i-am
+        </span>
+
+        <h2 class="title">I'm Michael Zhymanov.</h2>
+
+        <div class="lead">
+
+          <p>
+            I'm a freelance machine-learning developer and the founder of
+            Parralax. I work through the whole pipeline: understanding the
+            problem, preparing data, building and training the model,
+            evaluating it, and getting it to where it's actually usable.
+          </p>
+
+          <p>
+            I've built language models from scratch, object-detection systems
+            with YOLO, and image models with CNNs — trained on real data,
+            not just tutorials.
+          </p>
+
+          <p>
+            Parralax is one developer, not an agency. That means you talk
+            directly to the person doing the work, and every part of your
+            project is handled by the same engineer who built it.
+          </p>
+
+        </div>
+      </div>
+
       <div>
         <div class="chips">
           <span>python</span>
@@ -32,87 +706,133 @@ lass="container about-wrap">
           <span>deployment</span>
         </div>
       </div>
+
     </div>
   </section>
 
+
   <!-- ============ CONTACT ============ -->
+
   <section class="section" id="contact">
     <div class="container contact-wrap">
+
       <div>
-        <span class="eyebrow mono"><span class="n">03</span> contact</span>
+
+        <span class="eyebrow mono">
+          <span class="n">03</span> contact
+        </span>
+
         <h2 class="title">Let's talk about your data.</h2>
+
         <p class="lead">
-          Email works best — include a few sentences about your problem and whatever data you
-          have. A call works too. I usually reply within 1–2 business days.
+          Email works best — include a few sentences about your problem and
+          whatever data you have. I usually reply within 1–2 business days.
         </p>
 
         <div class="contact-card">
           <span class="ico" aria-hidden="true">&gt;_</span>
+
           <div>
             <span class="label">email</span>
-            <span class="value"><a href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a></span>
+            <span class="value">
+              <a href="mailto:michaelzhymanov@gmail.com">
+                michaelzhymanov@gmail.com
+              </a>
+            </span>
           </div>
         </div>
 
-        <div class="contact-card">
-          <span class="ico" aria-hidden="true">( )</span>
-          <div>
-            <span class="label">phone</span>
-            <span class="value"><a href="tel:+13033329024">(303) 332-9024</a></span>
-          </div>
-        </div>
       </div>
 
+
       <div>
-        <span class="eyebrow mono"><span class="n">04</span> your-project</span>
+
+        <span class="eyebrow mono">
+          <span class="n">04</span> your-project
+        </span>
+
         <h2 class="title">What to send</h2>
+
         <ul class="list-x">
           <li>What you're trying to build</li>
           <li>What data you have, even if it's messy</li>
           <li>What you'd like the model to do</li>
           <li>Timeline and budget, if you have them</li>
         </ul>
+
         <p class="lead" style="margin-top: 28px;">
-          Not sure which ML approach fits? That's fine — that's exactly what we figure out.
+          Not sure which ML approach fits? That's fine — that's exactly what
+          we figure out.
         </p>
-        <a class="btn btn-primary" href="mailto:michaelzhymanov@gmail.com">Email Me</a>
+
+        <a class="btn btn-primary" href="mailto:michaelzhymanov@gmail.com">
+          Email Me
+        </a>
+
       </div>
+
     </div>
   </section>
+
 </main>
+
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="mono">parralax.dev &copy; <span id="year">2026</span></p>
-    <p class="mono"><a href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a> · <a href="tel:+13033329024">(303) 332-9024</a></p>
+    <p class="mono">
+      parralax.dev &copy; <span id="year">2026</span>
+    </p>
+
+    <p class="mono">
+      <a href="mailto:michaelzhymanov@gmail.com">
+        michaelzhymanov@gmail.com
+      </a>
+    </p>
   </div>
 </footer>
+
 
 <script>
 (function () {
   "use strict";
 
   var year = document.getElementById("year");
-  if (year) year.textContent = String(new Date().getFullYear());
+  if (year) {
+    year.textContent = String(new Date().getFullYear());
+  }
 
   var toggle = document.querySelector(".nav-toggle");
   var links = document.getElementById("nav-links");
 
   if (toggle && links) {
+
     toggle.addEventListener("click", function () {
       var open = links.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+
+      toggle.setAttribute(
+        "aria-expanded",
+        open ? "true" : "false"
+      );
     });
 
     links.addEventListener("click", function (e) {
+
       if (e.target.closest("a")) {
         links.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
+
+        toggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
       }
+
     });
+
   }
+
 })();
 </script>
 
 </body>
 </html>
+```
