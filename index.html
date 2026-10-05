@@ -1,763 +1,691 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parralax - Data to Systems</title>
-<meta name="description" content="Parralax builds practical data systems and machine-learning software for companies.">
-<link rel="canonical" href="https://parralax.dev/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23120d1f'/%3E%3Cstop offset='100%25' stop-color='%23051d1b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M22 16h10c8 0 14 6 14 14s-6 14-14 14H22V16zm8 8v12h2c4 0 6-2 6-6s-2-6-6-6h-2z' fill='%23ffffff'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23120d1f'/%3E%3Cstop offset='100%25' stop-color='%23051d1b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M22 16h10c8 0 14 6 14 14s-6 14-14 14H22V16zm8 8v12h2c4 0 6-2 6-6s-2-6-6-6h-2z' fill='%23ffffff'/%3E%3C/svg%3E">
-
-<style>
-:root {
-  --bg: #0a0c10;
-  --surface: #0f1217;
-  --surface-alt: #131820;
-  --line: rgba(255, 255, 255, 0.08);
-  --text: #f5f7fa;
-  --muted: #a8b2c1;
-  --accent: #6d5ff8;
-  --max: 1200px;
-  --radius: 12px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.container {
-  width: min(var(--max), calc(100% - 48px));
-  margin: 0 auto;
-}
-
-/* Navigation */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--line);
-  background: rgba(10, 12, 16, 0.8);
-  backdrop-filter: blur(12px);
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: min(var(--max), calc(100% - 48px));
-  margin: 0 auto;
-}
-
-.logo {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nav-links a {
-  font-size: 14px;
-  color: var(--muted);
-  transition: color 0.2s;
-}
-
-.nav-links a:hover {
-  color: var(--text);
-}
-
-.nav-cta {
-  padding: 8px 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--text) !important;
-  transition: all 0.2s;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.nav-cta:hover {
-  border-color: var(--accent);
-  color: var(--accent) !important;
-}
-
-.menu {
-  display: none;
-  background: none;
-  border: 0;
-  color: var(--text);
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* Hero */
-.hero {
-  padding: 100px 0 80px;
-  text-align: center;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: 8px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 24px;
-}
-
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #3dd68e;
-}
-
-.hero h1 {
-  max-width: 920px;
-  margin: 0 auto 24px;
-  font-size: clamp(42px, 6vw, 72px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  font-weight: 700;
-}
-
-.hero-copy {
-  max-width: 620px;
-  margin: 0 auto 36px;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-.actions {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.2s;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #7d6ff8;
-}
-
-.btn-secondary {
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--text);
-}
-
-.btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.proof {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 64px;
-}
-
-.proof-item {
-  text-align: left;
-  padding: 32px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.proof-item strong {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.proof-item span {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-/* Sections */
-.section {
-  padding: 80px 0;
-  border-top: 1px solid var(--line);
-}
-
-.section-head {
-  max-width: 680px;
-  margin-bottom: 56px;
-}
-
-.kicker {
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 16px;
-}
-
-.title {
-  font-size: clamp(32px, 4vw, 48px);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin: 0 0 16px;
-  font-weight: 700;
-}
-
-.lead {
-  color: var(--muted);
-  font-size: 16px;
-  margin: 0;
-  line-height: 1.7;
-}
-
-/* Services/Cards */
-.services {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.card {
-  padding: 32px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  transition: all 0.2s;
-  display: flex;
-  flex-direction: column;
-}
-
-.card:hover {
-  border-color: var(--accent);
-  background: var(--surface-alt);
-  transform: translateY(-2px);
-}
-
-.card-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
-  background: rgba(109, 95, 248, 0.1);
-  border: 1px solid rgba(109, 95, 248, 0.2);
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.card h3 {
-  margin: 0 0 12px;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.7;
-  flex-grow: 1;
-}
-
-/* Process */
-.process {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.process-card {
-  padding: 32px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.process-number {
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.process-card h3 {
-  font-size: 20px;
-  margin: 16px 0 12px;
-  font-weight: 600;
-}
-
-.process-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-/* About */
-.about {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 56px;
-  align-items: start;
-}
-
-.about-copy p {
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.8;
-  margin: 0 0 16px;
-}
-
-.about-copy p:last-child {
-  margin-bottom: 0;
-}
-
-.profile {
-  padding: 32px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.profile-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
-  background: var(--accent);
-  color: white;
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.profile-name {
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.profile-role {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.profile-list {
-  display: grid;
-  gap: 0;
-}
-
-.profile-list div {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 0;
-  border-top: 1px solid var(--line);
-  font-size: 13px;
-}
-
-.profile-list div:first-child {
-  border-top: none;
-  padding-top: 0;
-}
-
-.profile-list span:first-child {
-  color: var(--muted);
-}
-
-/* Contact */
-.contact {
-  padding: 56px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.contact h2 {
-  max-width: 620px;
-  margin: 0 0 16px;
-  font-size: clamp(32px, 4vw, 48px);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  font-weight: 700;
-}
-
-.contact p {
-  max-width: 540px;
-  color: var(--muted);
-  margin: 0 0 24px;
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-.email {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--accent);
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 16px;
-  transition: opacity 0.2s;
-}
-
-.email:hover {
-  opacity: 0.8;
-}
-
-/* Footer */
-footer {
-  padding: 32px 0;
-  border-top: 1px solid var(--line);
-}
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  color: #6b7280;
-  font-size: 13px;
-}
-
-.footer a:hover {
-  color: var(--text);
-}
-
-/* Mobile */
-@media (max-width: 800px) {
-  .nav-links {
-    display: none;
-  }
-
-  .menu {
-    display: block;
-  }
-
-  .hero {
-    padding: 80px 0 60px;
-  }
-
-  .proof,
-  .services,
-  .process,
-  .about {
-    grid-template-columns: 1fr;
-  }
-
-  .about {
-    gap: 32px;
-  }
-
-  .contact {
-    padding: 36px 28px;
-  }
-
-  .footer {
-    flex-direction: column;
-  }
-
-  .nav-links.mobile-open {
-    display: flex;
-    position: absolute;
-    top: 72px;
-    left: 24px;
-    right: 24px;
-    padding: 12px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  }
-
-  .nav-links.mobile-open a {
-    padding: 12px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  * {
-    transition: none !important;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header class="navbar">
-  <nav class="nav" aria-label="Primary navigation">
-    <a class="logo" href="#top">
-      parralax.dev
-    </a>
-
-    <div class="nav-links">
-      <a href="#services">Capabilities</a>
-      <a href="#process">Process</a>
-      <a href="#about">About</a>
-      <a class="nav-cta" href="#contact">Start a project</a>
-    </div>
-
-    <button class="menu" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
-      ☰
-    </button>
-  </nav>
-</header>
-
-<main id="top">
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <div class="badge">
-        <span class="badge-dot"></span>
-        Independent software studio
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parralax - Data to Systems</title>
+    <meta
+      name="description"
+      content="Parralax builds practical data systems and machine-learning software for companies."
+    />
+    <link rel="canonical" href="https://parralax.dev/" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%236d5ff8'/%3E%3Cstop offset='1' stop-color='%233dd68e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='12' fill='%230a0c10'/%3E%3Cpath d='M18 42L31 18L46 42H18Z' fill='url(%23g)'/%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --bg: #0a0c10;
+        --surface: #0f1217;
+        --surface-alt: #131820;
+        --line: rgba(255, 255, 255, 0.08);
+        --text: #f5f7fa;
+        --muted: #a8b2c1;
+        --accent: #6d5ff8;
+        --max: 1200px;
+        --radius: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        background: rgba(10, 12, 16, 0.8);
+        backdrop-filter: blur(12px);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(var(--max), calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .nav-links a {
+        font-size: 14px;
+        color: var(--muted);
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .nav-cta {
+        padding: 8px 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--text) !important;
+        transition: all 0.2s;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .nav-cta:hover {
+        border-color: var(--accent);
+        color: var(--accent) !important;
+      }
+
+      .menu {
+        display: none;
+        background: none;
+        border: 0;
+        color: var(--text);
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .hero {
+        padding: 100px 0 80px;
+        text-align: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 24px;
+      }
+
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #3dd68e;
+      }
+
+      .hero h1 {
+        max-width: 920px;
+        margin: 0 auto 24px;
+        font-size: clamp(42px, 6vw, 72px);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+      }
+
+      .hero-copy {
+        max-width: 620px;
+        margin: 0 auto 36px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #7d6ff8;
+      }
+
+      .btn-secondary {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--text);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .proof {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 64px;
+      }
+
+      .proof-item {
+        text-align: left;
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .proof-item strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .proof-item span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .section {
+        padding: 80px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-head {
+        max-width: 680px;
+        margin-bottom: 56px;
+      }
+
+      .kicker {
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 16px;
+      }
+
+      .title {
+        font-size: clamp(32px, 4vw, 48px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        margin: 0 0 16px;
+        font-weight: 700;
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: 16px;
+        margin: 0;
+        line-height: 1.7;
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .card {
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        transition: all 0.2s;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card:hover {
+        border-color: var(--accent);
+        background: var(--surface-alt);
+        transform: translateY(-2px);
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: rgba(109, 95, 248, 0.1);
+        border: 1px solid rgba(109, 95, 248, 0.2);
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .card h3 {
+        margin: 0 0 12px;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+        flex-grow: 1;
+      }
+
+      .process {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .process-card {
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .process-number {
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .process-card h3 {
+        font-size: 20px;
+        margin: 16px 0 12px;
+        font-weight: 600;
+      }
+
+      .process-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .about {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 56px;
+        align-items: start;
+      }
+
+      .about-copy p {
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.8;
+        margin: 0 0 16px;
+      }
+
+      .about-copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .profile {
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .profile-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: var(--accent);
+        color: white;
+        font-weight: 700;
+        font-size: 20px;
+      }
+
+      .profile-name {
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      .profile-role {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .profile-list {
+        display: grid;
+        gap: 0;
+      }
+
+      .profile-list div {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 0;
+        border-top: 1px solid var(--line);
+        font-size: 13px;
+      }
+
+      .profile-list div:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .profile-list span:first-child {
+        color: var(--muted);
+      }
+
+      .contact {
+        padding: 56px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .contact h2 {
+        max-width: 620px;
+        margin: 0 0 16px;
+        font-size: clamp(32px, 4vw, 48px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+      }
+
+      .contact p {
+        max-width: 540px;
+        color: var(--muted);
+        margin: 0 0 24px;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .email {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent);
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 16px;
+        transition: opacity 0.2s;
+      }
+
+      .email:hover {
+        opacity: 0.8;
+      }
+
+      footer {
+        padding: 32px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        color: #6b7280;
+        font-size: 13px;
+      }
+
+      .footer a:hover {
+        color: var(--text);
+      }
+
+      @media (max-width: 800px) {
+        .nav-links {
+          display: none;
+        }
+
+        .menu {
+          display: block;
+        }
+
+        .services,
+        .proof,
+        .process,
+        .about {
+          grid-template-columns: 1fr;
+        }
+
+        .contact {
+          padding: 32px 20px;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav container">
+        <a href="#top" class="logo">Parralax</a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#about">About</a>
+          <a href="#contact" class="nav-cta">Book a call</a>
+        </nav>
+        <button class="menu" aria-label="Open menu">☰</button>
       </div>
+    </header>
 
-      <h1>Turn your data into something useful.</h1>
-
-      <p class="hero-copy">
-        Parralax builds practical data systems and custom software around the information your company already has - from raw files to working products.
-      </p>
-
-      <div class="actions">
-        <a class="btn btn-primary" href="#contact">Start a project →</a>
-        <a class="btn btn-secondary" href="#services">Explore capabilities</a>
-      </div>
-
-      <div class="proof">
-        <div class="proof-item">
-          <strong>Built around your data</strong>
-          <span>Workflows designed for your actual business.</span>
-        </div>
-        <div class="proof-item">
-          <strong>End-to-end delivery</strong>
-          <span>From messy inputs to a usable system.</span>
-        </div>
-        <div class="proof-item">
-          <strong>Direct collaboration</strong>
-          <span>You work directly with the developer.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Capabilities -->
-  <section class="section" id="services">
-    <div class="container">
-      <div class="section-head">
-        <div class="kicker">Capabilities</div>
-        <h2 class="title">Software built around the problems your business actually has.</h2>
-        <p class="lead">Parralax takes raw information, turns it into structured systems, and delivers software that fits into your existing workflow.</p>
-      </div>
-
-      <div class="services">
-        <article class="card">
-          <div class="card-icon">01</div>
-          <h3>Data systems</h3>
-          <p>Organize, clean, structure, and prepare business data so it can support reliable software and decision-making.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">02</div>
-          <h3>Custom models</h3>
-          <p>Develop purpose-built models for classification, prediction, detection, language, and other data-driven tasks.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">03</div>
-          <h3>Production software</h3>
-          <p>Connect the underlying system to a usable application, workflow, or internal tool your team can actually operate.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Process -->
-  <section class="section" id="process">
-    <div class="container">
-      <div class="section-head">
-        <div class="kicker">How it works</div>
-        <h2 class="title">Simple from the outside. Thorough underneath.</h2>
-        <p class="lead">Every project follows a clear path from understanding the problem to delivering something your company can use.</p>
-      </div>
-
-      <div class="process">
-        <article class="process-card">
-          <span class="process-number">01 - Discover</span>
-          <h3>Understand the problem</h3>
-          <p>We start with the business outcome, your existing workflow, and the information already available to you.</p>
-        </article>
-
-        <article class="process-card">
-          <span class="process-number">02 - Design</span>
-          <h3>Plan the solution</h3>
-          <p>We map out architecture, data flow, and integration points. No surprises, no retrofitting later.</p>
-        </article>
-
-        <article class="process-card">
-          <span class="process-number">03 - Develop</span>
-          <h3>Build and test</h3>
-          <p>We write production-quality code with documentation and testing baked in from day one.</p>
-        </article>
-
-        <article class="process-card">
-          <span class="process-number">04 - Deploy</span>
-          <h3>Launch and support</h3>
-          <p>We deploy the system, train your team, and provide support to make sure everything runs smoothly.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="about">
-        <div class="about-copy">
-          <p>
-            Parralax was built by Michael Zhymanov, a highschooler with a passion for Machine Learning and Data Science.
-          </p>
-          <p>
-            We do the work to understand your business first. That understanding shapes every decision we make from architecture to deployment. The result is software that actually works for your company.
-          </p>
-          <p>
-            We work with companies of all sizes, from startups sorting out their first data pipeline to enterprises building the next generation of their core systems.
-          </p>
+    <main id="top" class="container">
+      <section class="hero">
+        <div class="badge"><span class="badge-dot"></span> Littleton, Colorado</div>
+        <h1>Data systems that turn messy operations into products people trust.</h1>
+        <p class="hero-copy">
+          Parralax helps companies design practical data pipelines, analytics layers, and machine-learning systems that are durable, explainable, and ready for the real world.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:michaelzhymanov@gmail.com">Book a call</a>
+          <a class="btn btn-secondary" href="#services">See services</a>
         </div>
 
-        <div class="profile">
-          <div class="profile-top">
-            <div class="avatar">M</div>
-            <div>
-              <div class="profile-name">Michael Zhymanov</div>
-              <div class="profile-role">Founder & Developer</div>
-            </div>
+        <div class="proof">
+          <div class="proof-item">
+            <strong>Data foundations</strong>
+            <span>Pipeline design, warehouse architecture, and automation for teams scaling fast.</span>
           </div>
-          <div class="profile-list">
-            <div>
-              <span>Based in</span>
-              <span>Littleton, Colorado</span>
-            </div>
-            <div>
-              <span>Expertise</span>
-              <span>ML, Data Systems, APIs</span>
-            </div>
+          <div class="proof-item">
+            <strong>ML productization</strong>
+            <span>From prototype to deployment, with systems built for reliability and governance.</span>
+          </div>
+          <div class="proof-item">
+            <strong>Decision support</strong>
+            <span>Dashboards and metrics that help teams move from reports to operational insight.</span>
           </div>
         </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="section-head">
+          <div class="kicker">Services</div>
+          <h2 class="title">Built for operators, teams, and decision-makers.</h2>
+          <p class="lead">
+            We merge product thinking with engineering discipline to make data systems useful, understandable, and operationally stable.
+          </p>
+        </div>
+
+        <div class="services">
+          <article class="card">
+            <div class="card-icon">01</div>
+            <h3>Data Systems</h3>
+            <p>
+              Architecture, ingestion, quality checks, and data modeling for businesses that need dependable information flows.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">02</div>
+            <h3>Machine Learning</h3>
+            <p>
+              Model strategy, validation, and deployment support so teams can go from experiments to production with confidence.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">03</div>
+            <h3>Product Analytics</h3>
+            <p>
+              KPI design, dashboards, and instrumentation that help organizations make better operational decisions.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="process" class="section">
+        <div class="section-head">
+          <div class="kicker">Process</div>
+          <h2 class="title">Simple system design, practical execution.</h2>
+          <p class="lead">
+            Every engagement is designed around business constraints, technical realities, and the need for sustainable long-term adoption.
+          </p>
+        </div>
+
+        <div class="process">
+          <article class="process-card">
+            <div class="process-number">Step 01</div>
+            <h3>Assess</h3>
+            <p>We map your current workflows, bottlenecks, and data gaps to understand what matters most.</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-number">Step 02</div>
+            <h3>Design</h3>
+            <p>We define the architecture, interfaces, and metrics that support the business outcome you want.</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-number">Step 03</div>
+            <h3>Build</h3>
+            <p>We implement the system with clear ownership, operational guardrails, and a path toward iteration.</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-number">Step 04</div>
+            <h3>Operate</h3>
+            <p>We support measurement, monitoring, and refinement so your system stays useful as the business evolves.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="section-head">
+          <div class="kicker">About</div>
+          <h2 class="title">Practical engineering for real business problems.</h2>
+        </div>
+
+        <div class="about">
+          <div class="about-copy">
+            <p>
+              Parralax is a consulting and product studio focused on helping organizations turn fragmented data and experimentation efforts into reliable operating systems.
+            </p>
+            <p>
+              We work best with teams that want clarity, usable infrastructure, and systems that create momentum instead of complexity. Our approach combines technical depth with business practicality.
+            </p>
+            <p>
+              Based in Littleton, Colorado, we partner with teams across product, engineering, and operations to build systems that scale with intent.
+            </p>
+          </div>
+
+          <aside class="profile" aria-label="Profile">
+            <div class="profile-top">
+              <div class="avatar">M</div>
+              <div>
+                <div class="profile-name">Michael Zhymanov</div>
+                <div class="profile-role">Founder · Data & ML Systems</div>
+              </div>
+            </div>
+
+            <div class="profile-list">
+              <div>
+                <span>Location</span>
+                <strong>Littleton, Colorado</strong>
+              </div>
+              <div>
+                <span>Email</span>
+                <strong><a href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a></strong>
+              </div>
+              <div>
+                <span>Focus</span>
+                <strong>Data strategy and ML systems</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="contact">
+          <div class="kicker">Contact</div>
+          <h2>Tell us where your data systems are getting stuck.</h2>
+          <p>
+            Whether you need a better pipeline, a smarter analytics foundation, or a practical machine-learning strategy, we can help you design what comes next.
+          </p>
+          <a class="email" href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer">
+        <span>© 2025 Parralax</span>
+        <span>Littleton, Colorado</span>
       </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="contact">
-        <h2>Ready to turn your data into advantage?</h2>
-        <p>Let's talk about your project. We work directly with you to understand the problem and build the right solution.</p>
-        <a class="email" href="mailto:michaelzhymanov@gmail.com">
-          michaelzhymanov@gmail.com →
-        </a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="container">
-    <div class="footer">
-      <div>&copy; 2026 Parralax. All rights reserved.</div>
-      <div style="display: flex; gap: 24px;">
-        <a href="#">Twitter</a>
-        <a href="#">GitHub</a>
-        <a href="#">LinkedIn</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-// Mobile menu close on link click
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.remove('mobile-open');
-  });
-});
-</script>
-
-</body>
+    </footer>
+  </body>
 </html>
