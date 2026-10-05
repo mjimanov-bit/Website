@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parralax — Data to Systems</title>
+<title>Parralax - Data to Systems</title>
 <meta name="description" content="Parralax builds practical data systems and machine-learning software for companies.">
 <link rel="canonical" href="https://parralax.dev/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23111111'/%3E%3Cpath d='[...]
@@ -590,7 +590,7 @@ footer {
       <h1>Turn your data into something useful.</h1>
 
       <p class="hero-copy">
-        Parralax builds practical data systems and custom software around the information your company already has — from raw files to working products.
+        Parralax builds practical data systems and custom software around the information your company already has - from raw files to working products.
       </p>
 
       <div class="actions">
@@ -657,25 +657,25 @@ footer {
 
       <div class="process">
         <article class="process-card">
-          <span class="process-number">01 — Discover</span>
+          <span class="process-number">01 - Discover</span>
           <h3>Understand the problem</h3>
           <p>We start with the business outcome, your existing workflow, and the information already available to you.</p>
         </article>
 
         <article class="process-card">
-          <span class="process-number">02 — Design</span>
+          <span class="process-number">02 - Design</span>
           <h3>Plan the solution</h3>
           <p>We map out architecture, data flow, and integration points. No surprises, no retrofitting later.</p>
         </article>
 
         <article class="process-card">
-          <span class="process-number">03 — Develop</span>
+          <span class="process-number">03 - Develop</span>
           <h3>Build and test</h3>
           <p>We write production-quality code with documentation and testing baked in from day one.</p>
         </article>
 
         <article class="process-card">
-          <span class="process-number">04 — Deploy</span>
+          <span class="process-number">04 - Deploy</span>
           <h3>Launch and support</h3>
           <p>We deploy the system, train your team, and provide support to make sure everything runs smoothly.</p>
         </article>
@@ -692,7 +692,7 @@ footer {
             Parralax was built by developers who spent years working at data-heavy companies. We've seen the pain of tools that don't fit your workflow, models that don't solve real problems, and the cost of building the wrong system.
           </p>
           <p>
-            We do the work to understand your business first. That understanding shapes every decision we make—from architecture to deployment. The result is software that actually works for your team.
+            We do the work to understand your business first. That understanding shapes every decision we make from architecture to deployment. The result is software that actually works for your team.
           </p>
           <p>
             We work with companies of all sizes, from startups sorting out their first data pipeline to enterprises building the next generation of their core systems.
@@ -727,7 +727,7 @@ footer {
   </section>
 
   <!-- Contact -->
-  <section class="section">
+  <section class="section" id="contact">
     <div class="container">
       <div class="contact">
         <h2>Ready to turn your data into advantage?</h2>
@@ -755,12 +755,10 @@ footer {
 </footer>
 
 <script>
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
-    if (href !== '#' && document.querySelector(href)) {
-      e.preventDefault();
-    }
+// Mobile menu close on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.remove('mobile-open');
   });
 });
 </script>
