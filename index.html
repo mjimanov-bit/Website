@@ -1,858 +1,1156 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Contact | Parralax</title>
-
-  <meta
-    name="description"
-    content="Contact Parralax about machine learning, data, and software projects."
-  >
-
-  <!-- Parralax favicon -->
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%236d5ff8'/%3E%3Cstop offset='1' stop-color='%233dd68e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='12' fill='%230a0c10'/%3E%3Cpath d='M18 42L31 18L46 42H18Z' fill='url(%23g)'/%3E%3C/svg%3E"
-  >
-
-  <style>
-    :root {
-      --background: #0a0c0f;
-      --surface: #101318;
-      --border: #252a31;
-      --text: #f1f3f5;
-      --muted: #8c949f;
-      --max-width: 1080px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 80px;
-    }
-
-    body {
-      margin: 0;
-      background: var(--background);
-      color: var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body.menu-open {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    textarea {
-      font: inherit;
-    }
-
-    .container {
-      width: min(var(--max-width), calc(100% - 48px));
-      margin: 0 auto;
-    }
-
-    /* =========================
-       NAVIGATION
-    ========================= */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(10, 12, 15, 0.96);
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      font-size: 14px;
-      transition: color 0.15s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text);
-    }
-
-    .nav-contact {
-      border: 1px solid var(--border);
-      padding: 8px 13px;
-      border-radius: 4px;
-    }
-
-    .nav-contact:hover {
-      border-color: #555b63;
-    }
-
-    /* Mobile menu */
-
-    .menu-button {
-      display: none;
-      border: 0;
-      background: transparent;
-      color: var(--text);
-      padding: 8px;
-      cursor: pointer;
-      font-size: 22px;
-      line-height: 1;
-    }
-
-    .mobile-menu {
-      display: none;
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    main {
-      min-height: calc(100vh - 145px);
-      padding: 100px 0;
-    }
-
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: start;
-    }
-
-    .eyebrow {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 560px;
-      font-size: clamp(42px, 6vw, 68px);
-      line-height: 1.02;
-      letter-spacing: -0.045em;
-      font-weight: 650;
-    }
-
-    .intro {
-      max-width: 480px;
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.7;
-    }
-
-    /* =========================
-       CONTACT DETAILS
-    ========================= */
-
-    .contact-details {
-      margin-top: 42px;
-      border-top: 1px solid var(--border);
-    }
-
-    .contact-row {
-      padding: 22px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .label {
-      display: block;
-      margin-bottom: 7px;
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .value {
-      font-size: 17px;
-    }
-
-    .email-link {
-      display: inline-block;
-      border-bottom: 1px solid #555b63;
-      padding-bottom: 2px;
-      transition: border-color 0.15s ease;
-    }
-
-    .email-link:hover {
-      border-color: white;
-    }
-
-    /* =========================
-       FORM
-    ========================= */
-
-    .form {
-      margin-top: 0;
-    }
-
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 9px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      padding: 13px 14px;
-      border-radius: 4px;
-      outline: none;
-      transition: border-color 0.15s ease;
-    }
-
-    input {
-      height: 46px;
-    }
-
-    textarea {
-      min-height: 170px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #626a74;
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: #626973;
-    }
-
-    .submit {
-      border: 1px solid #d8dadd;
-      background: #f1f3f5;
-      color: #090b0e;
-      padding: 12px 20px;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.15s ease;
-    }
-
-    .submit:hover {
-      opacity: 0.85;
-    }
-
-    .note {
-      margin-top: 14px;
-      color: #626973;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    /* =========================
-       BACK TO TOP
-    ========================= */
-
-    .back-top {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--border);
-      background: #101318;
-      color: var(--text);
-      border-radius: 4px;
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .back-top.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 0;
-    }
-
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      color: #626973;
-      font-size: 12px;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 760px) {
-
-      .container {
-        width: min(100% - 32px, var(--max-width));
-      }
-
-      nav {
-        height: 64px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .menu-button {
-        display: block;
-      }
-
-      .mobile-menu {
-        position: fixed;
-        inset: 65px 0 0;
-        z-index: 999;
-        background: var(--background);
-        padding: 24px 16px;
-        border-top: 1px solid var(--border);
-      }
-
-      .mobile-menu.open {
-        display: block;
-      }
-
-      .mobile-menu a {
-        display: block;
-        padding: 18px 0;
-        border-bottom: 1px solid var(--border);
-        color: var(--muted);
-        font-size: 16px;
-      }
-
-      .mobile-menu a:hover {
-        color: var(--text);
-      }
-
-      main {
-        padding: 64px 0 80px;
-      }
-
-      .contact-layout {
-        grid-template-columns: 1fr;
-        gap: 64px;
-      }
-
-      h1 {
-        font-size: 48px;
-      }
-
-      .intro {
-        font-size: 16px;
-      }
-
-      .footer {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .back-top {
-        right: 16px;
-        bottom: 16px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Parralax - Data to Systems</title>
+    <meta
+        name="description"
+        content="Parralax builds data systems, machine learning solutions, and analytics tools."
+    >
+
+    <!-- Parralax favicon -->
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0c10'/%3E%3Cpath d='M18 16h18c8 0 13 5 13 12s-5 12-13 12H27v9h-9V16zm9 8v8h8c3 0 5-1 5-4s-2-4-5-4h-8z' fill='%23f5f7fa'/%3E%3C/svg%3E"
+    >
+
+    <style>
+        :root {
+            --bg: #090b0f;
+            --surface: #0e1116;
+            --surface-2: #12161d;
+            --line: #222832;
+            --line-light: #2b323d;
+
+            --text: #f3f5f7;
+            --muted: #9aa3af;
+            --muted-2: #707985;
+
+            --accent: #7c72ff;
+            --accent-hover: #9189ff;
+
+            --max-width: 1180px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        .container {
+            width: min(var(--max-width), calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: rgba(9, 11, 15, 0.94);
+            border-bottom: 1px solid var(--line);
+
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-mark {
+            width: 25px;
+            height: 25px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--line-light);
+            background: var(--surface);
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-cta {
+            color: var(--text) !important;
+
+            border: 1px solid var(--line-light);
+            padding: 9px 15px;
+
+            background: var(--surface);
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            border-color: #454d59;
+            background: var(--surface-2);
+        }
+
+        .menu-button {
+            display: none;
+
+            border: 1px solid var(--line-light);
+            background: transparent;
+            color: var(--text);
+
+            width: 42px;
+            height: 38px;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            padding: 135px 0 125px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .eyebrow {
+            display: inline-block;
+
+            margin-bottom: 25px;
+
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .hero h1 {
+            max-width: 850px;
+
+            font-size: clamp(48px, 7vw, 82px);
+            line-height: 0.98;
+            letter-spacing: -0.055em;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--muted-2);
+        }
+
+        .hero-copy {
+            max-width: 670px;
+
+            margin-top: 30px;
+
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+
+            margin-top: 38px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 45px;
+            padding: 0 18px;
+
+            border: 1px solid var(--line-light);
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .button-primary {
+            background: var(--text);
+            color: #090b0f;
+            border-color: var(--text);
+        }
+
+        .button-primary:hover {
+            background: #dfe3e8;
+            border-color: #dfe3e8;
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--text);
+        }
+
+        .button-secondary:hover {
+            background: var(--surface);
+            border-color: #454d59;
+        }
+
+        /* =========================
+           SECTION BASE
+        ========================= */
+
+        section {
+            padding: 110px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
+
+            margin-bottom: 65px;
+        }
+
+        .section-number {
+            color: var(--muted-2);
+
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .section-heading h2 {
+            max-width: 720px;
+
+            font-size: clamp(32px, 4vw, 48px);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .section-heading p {
+            margin-top: 20px;
+
+            max-width: 620px;
+
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            border-top: 1px solid var(--line);
+        }
+
+        .service {
+            padding: 32px 28px 38px;
+
+            border-right: 1px solid var(--line);
+        }
+
+        .service:last-child {
+            border-right: none;
+        }
+
+        .service-number {
+            color: var(--muted-2);
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .service h3 {
+            margin-top: 55px;
+
+            font-size: 21px;
+            letter-spacing: -0.02em;
+        }
+
+        .service p {
+            margin-top: 14px;
+
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .service ul {
+            margin-top: 25px;
+
+            list-style: none;
+        }
+
+        .service li {
+            padding: 9px 0;
+
+            border-top: 1px solid var(--line);
+
+            color: #c2c8d0;
+            font-size: 13px;
+        }
+
+        /* =========================
+           PROCESS
+        ========================= */
+
+        .process {
+            border-top: 1px solid var(--line);
+        }
+
+        .process-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr;
+
+            padding: 30px 0;
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .process-row:first-child {
+            border-top: 1px solid var(--line);
+        }
+
+        .process-number {
+            color: var(--muted-2);
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .process-row h3 {
+            font-size: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .process-row p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 100px;
+        }
+
+        .about-text p {
+            margin-bottom: 22px;
+
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .founder {
+            border-top: 1px solid var(--line);
+            padding-top: 25px;
+        }
+
+        .founder-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .founder-role {
+            margin-top: 5px;
+
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .about-list {
+            border-top: 1px solid var(--line);
+        }
+
+        .about-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+
+            padding: 19px 0;
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .about-item span:first-child {
+            color: var(--muted);
+        }
+
+        .about-item span:last-child {
+            text-align: right;
+        }
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        #contact {
+            padding-top: 125px;
+            padding-bottom: 130px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+
+            gap: 100px;
+        }
+
+        .contact-intro h2 {
+            max-width: 520px;
+
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1;
+            letter-spacing: -0.045em;
+        }
+
+        .contact-intro p {
+            max-width: 460px;
+
+            margin-top: 25px;
+
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .contact-email {
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding-bottom: 4px;
+
+            border-bottom: 1px solid var(--muted-2);
+
+            font-size: 15px;
+        }
+
+        .contact-form {
+            border-top: 1px solid var(--line);
+        }
+
+        .field {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+
+            min-height: 70px;
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .field label {
+            padding-top: 22px;
+
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+
+            padding: 21px 0;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+            color: var(--text);
+
+            font-size: 15px;
+        }
+
+        .field textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: #555e6a;
+        }
+
+        .form-submit {
+            display: flex;
+            justify-content: flex-end;
+
+            padding-top: 25px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 30px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copy,
+        .footer-location {
+            color: var(--muted-2);
+            font-size: 12px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+            .container {
+                width: min(100% - 32px, var(--max-width));
+            }
+
+            .nav {
+                height: 64px;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+
+                padding: 8px 16px 16px;
+
+                background: var(--bg);
+                border-bottom: 1px solid var(--line);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 15px 0;
+
+                border-bottom: 1px solid var(--line);
+            }
+
+            .nav-cta {
+                margin-top: 8px;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 90px 0 90px;
+            }
+
+            .hero h1 {
+                font-size: clamp(46px, 14vw, 68px);
+            }
+
+            .hero-copy {
+                font-size: 16px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .section-heading,
+            .contact-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .service {
+                border-right: none;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .service:last-child {
+                border-bottom: none;
+            }
+
+            .process-row {
+                grid-template-columns: 50px 1fr;
+                gap: 15px;
+            }
+
+            .process-row p {
+                grid-column: 2;
+            }
+
+            .field {
+                grid-template-columns: 1fr;
+            }
+
+            .field label {
+                padding-top: 18px;
+            }
+
+            .field input,
+            .field textarea {
+                padding-top: 8px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+<header>
+    <div class="container nav">
 
-  <header>
-    <nav class="container">
-
-      <a href="index.html" class="logo">
-        Parralax
-      </a>
-
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="index.html#services">Services</a>
-        <a href="index.html#process">Process</a>
-        <a href="index.html#about">About</a>
-        <a href="contact.html" class="active nav-contact">
-          Contact
+        <a href="#home" class="logo">
+            <span class="logo-mark">P</span>
+            <span>Parralax</span>
         </a>
-      </div>
 
-      <button
-        class="menu-button"
-        id="menuButton"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-        aria-controls="mobileMenu"
-      >
-        ☰
-      </button>
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Open navigation"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
 
-    </nav>
-
-    <div class="mobile-menu" id="mobileMenu">
-
-      <div class="container">
-        <a href="index.html">Home</a>
-        <a href="index.html#services">Services</a>
-        <a href="index.html#process">Process</a>
-        <a href="index.html#about">About</a>
-        <a href="contact.html">Contact</a>
-      </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="#services">Services</a>
+            <a href="#process">Process</a>
+            <a href="#about">About</a>
+            <a href="#contact" class="nav-cta">Contact</a>
+        </nav>
 
     </div>
-  </header>
+</header>
 
 
-  <!-- =========================
-       MAIN CONTENT
-  ========================= -->
+<main>
 
-  <main>
+    <!-- HOME -->
 
-    <div class="container">
+    <section class="hero" id="home">
+        <div class="container">
 
-      <div class="contact-layout">
+            <span class="eyebrow">Data & Machine Learning</span>
 
-        <section>
+            <h1>
+                Data into decisions.
+                <span>Systems that work.</span>
+            </h1>
 
-          <div class="eyebrow">
-            Contact
-          </div>
-
-          <h1>
-            Have a project in mind?
-          </h1>
-
-          <p class="intro">
-            Tell me what you're trying to build, what problem you're
-            running into, or where your data currently stands. I'll
-            get back to you and we can figure out whether Parralax
-            can help.
-          </p>
-
-          <div class="contact-details">
-
-            <div class="contact-row">
-              <span class="label">Email</span>
-
-              <div class="value">
-                <a
-                  class="email-link"
-                  href="mailto:michaelzhymanov@gmail.com"
-                >
-                  michaelzhymanov@gmail.com
-                </a>
-              </div>
-            </div>
-
-            <div class="contact-row">
-              <span class="label">Based in</span>
-
-              <div class="value">
-                Colorado
-              </div>
-            </div>
-
-            <div class="contact-row">
-              <span class="label">Work</span>
-
-              <div class="value">
-                Machine learning · Data · Software
-              </div>
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =========================
-             CONTACT FORM
-        ========================= -->
-
-        <section>
-
-          <form
-            class="form"
-            id="contactForm"
-          >
-
-            <div class="form-group">
-
-              <label for="name">
-                Name
-              </label>
-
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Your name"
-                autocomplete="name"
-                required
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="email">
-                Email
-              </label>
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                autocomplete="email"
-                required
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="message">
-                Project
-              </label>
-
-              <textarea
-                id="message"
-                name="message"
-                placeholder="Tell me a little about what you're trying to build..."
-                required
-              ></textarea>
-
-            </div>
-
-
-            <button
-              class="submit"
-              type="submit"
-            >
-              Send message
-            </button>
-
-            <p class="note">
-              Your email application will open with the message
-              automatically filled in.
+            <p class="hero-copy">
+                Parralax builds practical data systems, machine learning
+                solutions, and analytics tools for organizations that need
+                useful software, not another dashboard.
             </p>
 
-          </form>
+            <div class="hero-actions">
+                <a href="#contact" class="button button-primary">
+                    Start a project
+                </a>
 
-        </section>
+                <a href="#services" class="button button-secondary">
+                    Explore services
+                </a>
+            </div>
 
-      </div>
+        </div>
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section id="services">
+        <div class="container">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-number">01 / SERVICES</span>
+                </div>
+
+                <div>
+                    <h2>
+                        Technical work built around the problem.
+                    </h2>
+
+                    <p>
+                        From raw data to deployed systems, Parralax focuses
+                        on building infrastructure that can actually be used
+                        and maintained.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="services">
+
+                <article class="service">
+                    <span class="service-number">01</span>
+
+                    <h3>Data Systems</h3>
+
+                    <p>
+                        Turn scattered, inconsistent data into reliable
+                        systems that teams can use.
+                    </p>
+
+                    <ul>
+                        <li>Data pipelines</li>
+                        <li>Cleaning and transformation</li>
+                        <li>Database systems</li>
+                        <li>Automation</li>
+                    </ul>
+                </article>
+
+
+                <article class="service">
+                    <span class="service-number">02</span>
+
+                    <h3>Machine Learning</h3>
+
+                    <p>
+                        Build and deploy models for real operational
+                        problems.
+                    </p>
+
+                    <ul>
+                        <li>Computer vision</li>
+                        <li>Prediction models</li>
+                        <li>Model deployment</li>
+                        <li>ML experimentation</li>
+                    </ul>
+                </article>
+
+
+                <article class="service">
+                    <span class="service-number">03</span>
+
+                    <h3>Analytics</h3>
+
+                    <p>
+                        Turn business data into tools that make decisions
+                        easier and faster.
+                    </p>
+
+                    <ul>
+                        <li>Reporting systems</li>
+                        <li>Business analytics</li>
+                        <li>Custom dashboards</li>
+                        <li>Decision tools</li>
+                    </ul>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- PROCESS -->
+
+    <section id="process">
+        <div class="container">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-number">02 / PROCESS</span>
+                </div>
+
+                <div>
+                    <h2>
+                        Simple process. Serious implementation.
+                    </h2>
+
+                    <p>
+                        Projects start with understanding the actual
+                        problem, then move through design, implementation,
+                        and deployment.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="process">
+
+                <div class="process-row">
+                    <span class="process-number">01</span>
+
+                    <h3>Assess</h3>
+
+                    <p>
+                        Understand the existing data, workflow, constraints,
+                        and desired outcome.
+                    </p>
+                </div>
+
+
+                <div class="process-row">
+                    <span class="process-number">02</span>
+
+                    <h3>Design</h3>
+
+                    <p>
+                        Define the technical approach and architecture before
+                        building.
+                    </p>
+                </div>
+
+
+                <div class="process-row">
+                    <span class="process-number">03</span>
+
+                    <h3>Build</h3>
+
+                    <p>
+                        Develop the system, model, pipeline, or application
+                        around the requirements.
+                    </p>
+                </div>
+
+
+                <div class="process-row">
+                    <span class="process-number">04</span>
+
+                    <h3>Deploy</h3>
+
+                    <p>
+                        Put the finished system into use and make sure it can
+                        continue operating reliably.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+        <div class="container">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-number">03 / ABOUT</span>
+                </div>
+
+                <div>
+                    <h2>
+                        Small by design. Technical by default.
+                    </h2>
+                </div>
+            </div>
+
+
+            <div class="about-grid">
+
+                <div class="about-text">
+
+                    <p>
+                        Parralax is an independent data and machine learning
+                        studio focused on building useful technical systems.
+                    </p>
+
+                    <p>
+                        The goal is straightforward: understand the problem,
+                        build the right system, and avoid unnecessary
+                        complexity.
+                    </p>
+
+                    <p>
+                        Projects can range from data automation and analytics
+                        to computer vision and machine learning applications.
+                    </p>
+
+                    <div class="founder">
+                        <div class="founder-name">
+                            Michael Zhymanov
+                        </div>
+
+                        <div class="founder-role">
+                            Founder · Data & ML Systems
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="about-list">
+
+                    <div class="about-item">
+                        <span>Focus</span>
+                        <span>Data & Machine Learning</span>
+                    </div>
+
+                    <div class="about-item">
+                        <span>Based in</span>
+                        <span>Colorado</span>
+                    </div>
+
+                    <div class="about-item">
+                        <span>Work</span>
+                        <span>Remote / Project-based</span>
+                    </div>
+
+                    <div class="about-item">
+                        <span>Approach</span>
+                        <span>Practical & technical</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+        <div class="container">
+
+            <div class="contact-grid">
+
+                <div class="contact-intro">
+
+                    <span class="eyebrow">
+                        04 / CONTACT
+                    </span>
+
+                    <h2>
+                        Have a problem worth building around?
+                    </h2>
+
+                    <p>
+                        Tell me what you're working with, what isn't working,
+                        and what you want the finished system to do.
+                    </p>
+
+                    <a
+                        href="mailto:michaelzhymanov@gmail.com"
+                        class="contact-email"
+                    >
+                        michaelzhymanov@gmail.com
+                    </a>
+
+                </div>
+
+
+                <form
+                    class="contact-form"
+                    action="mailto:michaelzhymanov@gmail.com"
+                    method="post"
+                    enctype="text/plain"
+                >
+
+                    <div class="field">
+                        <label for="name">Name</label>
+
+                        <input
+                            id="name"
+                            name="Name"
+                            type="text"
+                            placeholder="Your name"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="field">
+                        <label for="email">Email</label>
+
+                        <input
+                            id="email"
+                            name="Email"
+                            type="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="field">
+                        <label for="company">Organization</label>
+
+                        <input
+                            id="company"
+                            name="Organization"
+                            type="text"
+                            placeholder="Company or organization"
+                        >
+                    </div>
+
+
+                    <div class="field">
+                        <label for="message">Project</label>
+
+                        <textarea
+                            id="message"
+                            name="Project"
+                            placeholder="What are you trying to build?"
+                            required
+                        ></textarea>
+                    </div>
+
+
+                    <div class="form-submit">
+                        <button
+                            type="submit"
+                            class="button button-primary"
+                        >
+                            Send inquiry
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+
+<footer>
+    <div class="container footer-inner">
+
+        <span class="footer-copy">
+            © 2026 Parralax
+        </span>
+
+        <span class="footer-location">
+            Colorado
+        </span>
 
     </div>
-
-  </main>
-
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
-  <footer>
-
-    <div class="container footer">
-
-      <span>
-        © 2026 Parralax
-      </span>
-
-      <span>
-        Machine learning · Data · Software
-      </span>
-
-    </div>
-
-  </footer>
+</footer>
 
 
-  <!-- BACK TO TOP -->
-
-  <button
-    class="back-top"
-    id="backTop"
-    aria-label="Back to top"
-  >
-    ↑
-  </button>
-
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================= -->
-
-  <script>
-
-    /* -------------------------
-       Mobile navigation
-    ------------------------- */
-
+<script>
     const menuButton = document.getElementById("menuButton");
-    const mobileMenu = document.getElementById("mobileMenu");
+    const navLinks = document.getElementById("navLinks");
 
     menuButton.addEventListener("click", () => {
-
-      const isOpen = mobileMenu.classList.toggle("open");
-
-      menuButton.setAttribute(
-        "aria-expanded",
-        isOpen
-      );
-
-      menuButton.setAttribute(
-        "aria-label",
-        isOpen
-          ? "Close navigation menu"
-          : "Open navigation menu"
-      );
-
-      menuButton.textContent = isOpen ? "×" : "☰";
-
-      document.body.classList.toggle(
-        "menu-open",
-        isOpen
-      );
-
-    });
-
-
-    /* -------------------------
-       Close mobile menu
-       after navigation
-    ------------------------- */
-
-    const mobileLinks =
-      mobileMenu.querySelectorAll("a");
-
-    mobileLinks.forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        mobileMenu.classList.remove("open");
+        const isOpen = navLinks.classList.toggle("active");
 
         menuButton.setAttribute(
-          "aria-expanded",
-          "false"
+            "aria-expanded",
+            isOpen ? "true" : "false"
         );
-
-        menuButton.setAttribute(
-          "aria-label",
-          "Open navigation menu"
-        );
-
-        menuButton.textContent = "☰";
-
-        document.body.classList.remove(
-          "menu-open"
-        );
-
-      });
-
     });
 
 
-    /* -------------------------
-       Escape closes menu
-    ------------------------- */
-
-    document.addEventListener("keydown", event => {
-
-      if (
-        event.key === "Escape" &&
-        mobileMenu.classList.contains("open")
-      ) {
-
-        mobileMenu.classList.remove("open");
-
-        menuButton.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-        menuButton.setAttribute(
-          "aria-label",
-          "Open navigation menu"
-        );
-
-        menuButton.textContent = "☰";
-
-        document.body.classList.remove(
-          "menu-open"
-        );
-
-      }
-
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+            navLinks.classList.remove("active");
+            menuButton.setAttribute("aria-expanded", "false");
+        });
     });
-
-
-    /* -------------------------
-       Contact form
-    ------------------------- */
-
-    const contactForm =
-      document.getElementById("contactForm");
-
-    contactForm.addEventListener("submit", event => {
-
-      event.preventDefault();
-
-      const name =
-        document.getElementById("name").value.trim();
-
-      const email =
-        document.getElementById("email").value.trim();
-
-      const message =
-        document.getElementById("message").value.trim();
-
-      const subject =
-        encodeURIComponent(
-          `Parralax project inquiry from ${name}`
-        );
-
-      const body =
-        encodeURIComponent(
-          `Name: ${name}\n` +
-          `Email: ${email}\n\n` +
-          `Project:\n${message}`
-        );
-
-      window.location.href =
-        `mailto:michaelzhymanov@gmail.com?subject=${subject}&body=${body}`;
-
-    });
-
-
-    /* -------------------------
-       Back to top
-    ------------------------- */
-
-    const backTop =
-      document.getElementById("backTop");
-
-    window.addEventListener("scroll", () => {
-
-      if (window.scrollY > 500) {
-
-        backTop.classList.add("visible");
-
-      } else {
-
-        backTop.classList.remove("visible");
-
-      }
-
-    });
-
-
-    backTop.addEventListener("click", () => {
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    });
-
-
-    /* -------------------------
-       Close mobile menu when
-       resizing back to desktop
-    ------------------------- */
-
-    window.addEventListener("resize", () => {
-
-      if (window.innerWidth > 760) {
-
-        mobileMenu.classList.remove("open");
-
-        menuButton.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-        menuButton.setAttribute(
-          "aria-label",
-          "Open navigation menu"
-        );
-
-        menuButton.textContent = "☰";
-
-        document.body.classList.remove(
-          "menu-open"
-        );
-
-      }
-
-    });
-
-  </script>
+</script>
 
 </body>
 </html>
-```
