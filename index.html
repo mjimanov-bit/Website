@@ -6,722 +6,551 @@
 <title>Parralax — Data to Systems</title>
 <meta name="description" content="Parralax builds practical data systems and machine-learning software for companies.">
 <link rel="canonical" href="https://parralax.dev/">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Parralax</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23111111'/%3E%3Cpath d='M17 50V14h19c10 0 15 6 15 14s-5 14-15 14H25v8H17zm8-15h10c5 0 8-2 8-7s-3-7-8-7H25v14z' fill='white'/%3E%3C/svg%3E">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./favicon.png">
-    <link rel="apple-touch-icon" href="./favicon.png">
-
-    <meta name="description" content="Parralax — Machine learning solutions from raw data to working models.">
-
-    <link rel="stylesheet" href="./style.css">
-</head>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23111111'/%3E%3Cpath d='M20 20h24v24H20z' fill='%237c5cff'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="./favicon.png">
 
 <style>
-:root{
-  --bg:#07090d;
-  --surface:#0d1118;
-  --surface-2:#111720;
-  --line:rgba(255,255,255,.09);
-  --line-strong:rgba(255,255,255,.15);
-  --text:#f5f7fa;
-  --muted:#98a2b3;
-  --soft:#cbd2dc;
-  --accent:#7c5cff;
-  --accent-2:#9b87ff;
-  --accent-soft:rgba(124,92,255,.14);
-  --green:#58d6a1;
-  --max:1180px;
-  --radius:18px;
-  --shadow:0 25px 80px rgba(0,0,0,.35);
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:90px;
-}
-
-body{
-  margin:0;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
-    BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(124,92,255,.13),
-      transparent 34%
-    ),
-    var(--bg);
-  color:var(--text);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.22;
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,.018) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.018) 1px,
-      transparent 1px
-    );
-  background-size:48px 48px;
-  mask-image:linear-gradient(
-    to bottom,
-    black,
-    transparent 70%
-  );
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-.container{
-  width:min(
-    var(--max),
-    calc(100% - 40px)
-  );
-  margin:auto;
-}
-
-/* =========================
-   NAVIGATION
-========================= */
-
-.navbar{
-  position:sticky;
-  top:0;
-  z-index:100;
-  height:76px;
-  display:flex;
-  align-items:center;
-  border-bottom:1px solid rgba(255,255,255,.06);
-  background:rgba(7,9,13,.72);
-  backdrop-filter:blur(20px);
-}
-
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:min(
-    var(--max),
-    calc(100% - 40px)
-  );
-  margin:auto;
+:root {
+  --bg: #0a0c10;
+  --surface: #0f1217;
+  --surface-alt: #131820;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #f5f7fa;
+  --muted: #a8b2c1;
+  --accent: #6d5ff8;
+  --max: 1200px;
+  --radius: 12px;
 }
 
-.logo{
-  font-size:19px;
-  font-weight:750;
-  letter-spacing:-.04em;
-}
-
-.logo span{
-  color:var(--accent-2);
+* {
+  box-sizing: border-box;
 }
 
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:30px;
-}
-
-.nav-links a{
-  font-size:14px;
-  color:var(--muted);
-  transition:.2s;
-}
-
-.nav-links a:hover{
-  color:var(--text);
-}
-
-.nav-cta{
-  padding:10px 17px;
-  border:1px solid var(--line-strong);
-  border-radius:10px;
-  background:rgba(255,255,255,.035);
-  color:var(--text)!important;
-}
-
-.nav-cta:hover{
-  background:rgba(255,255,255,.07);
-  border-color:rgba(124,92,255,.5);
-}
-
-.menu{
-  display:none;
-  background:none;
-  border:0;
-  color:var(--text);
-  font-size:22px;
-  cursor:pointer;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  position:relative;
-  padding:125px 0 105px;
-  text-align:center;
-  overflow:hidden;
-}
-
-.hero-glow{
-  position:absolute;
-  width:700px;
-  height:500px;
-  left:50%;
-  top:-250px;
-  transform:translateX(-50%);
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(124,92,255,.22),
-      transparent 68%
-    );
-  pointer-events:none;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
-.badge{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:7px 12px;
-  border:1px solid rgba(124,92,255,.28);
-  background:rgba(124,92,255,.08);
-  border-radius:999px;
-  color:#c9c0ff;
-  font-size:13px;
-  font-weight:600;
-  margin-bottom:24px;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.badge-dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 12px var(--green);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.hero h1{
-  position:relative;
-  max-width:900px;
-  margin:0 auto 24px;
-  font-size:clamp(48px,7vw,82px);
-  line-height:.98;
-  letter-spacing:-.065em;
-  font-weight:780;
+.container {
+  width: min(var(--max), calc(100% - 48px));
+  margin: 0 auto;
 }
 
-.gradient{
-  background:
-    linear-gradient(
-      100deg,
-      #fff 10%,
-      #bdb0ff 70%,
-      #8e78ff
-    );
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+/* Navigation */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  background: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(12px);
 }
 
-.hero-copy{
-  max-width:650px;
-  margin:0 auto 36px;
-  color:var(--muted);
-  font-size:19px;
-  line-height:1.7;
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(var(--max), calc(100% - 48px));
+  margin: 0 auto;
 }
 
-.actions{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
+.logo {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:48px;
-  padding:0 20px;
-  border-radius:11px;
-  font-size:14px;
-  font-weight:650;
-  transition:
-    transform .2s,
-    background .2s,
-    border-color .2s;
-}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 0.2s;
+}
 
-.btn:hover{
-  transform:translateY(-1px);
+.nav-links a:hover {
+  color: var(--text);
 }
 
-.btn-primary{
-  background:var(--text);
-  color:#080a0e;
-  box-shadow:0 8px 28px rgba(255,255,255,.08);
+.nav-cta {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text) !important;
+  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.btn-primary:hover{
-  background:#fff;
+.nav-cta:hover {
+  border-color: var(--accent);
+  color: var(--accent) !important;
 }
 
-.btn-secondary{
-  border:1px solid var(--line-strong);
-  background:rgba(255,255,255,.025);
-  color:var(--text);
+.menu {
+  display: none;
+  background: none;
+  border: 0;
+  color: var(--text);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
 }
-
-.btn-secondary:hover{
-  background:rgba(255,255,255,.06);
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
 }
 
-.proof{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  margin-top:82px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:rgba(255,255,255,.025);
-  overflow:hidden;
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3dd68e;
 }
 
-.proof-item{
-  padding:25px;
-  border-right:1px solid var(--line);
+.hero h1 {
+  max-width: 920px;
+  margin: 0 auto 24px;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
-.proof-item:last-child{
-  border-right:0;
+.hero-copy {
+  max-width: 620px;
+  margin: 0 auto 36px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
 }
 
-.proof strong{
-  display:block;
-  font-size:14px;
-  margin-bottom:4px;
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.proof span{
-  color:var(--muted);
-  font-size:13px;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 
-/* =========================
-   SECTIONS
-========================= */
-
-.section{
-  padding:105px 0;
-  border-top:1px solid rgba(255,255,255,.06);
+.btn-primary {
+  background: var(--accent);
+  color: white;
 }
 
-.section-head{
-  max-width:680px;
-  margin-bottom:48px;
+.btn-primary:hover {
+  background: #7d6ff8;
 }
 
-.kicker{
-  color:#a99cff;
-  font-size:12px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.13em;
-  margin-bottom:13px;
+.btn-secondary {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
 }
 
-.title{
-  font-size:clamp(34px,4.5vw,52px);
-  line-height:1.08;
-  letter-spacing:-.045em;
-  margin:0 0 16px;
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
-.lead{
-  color:var(--muted);
-  font-size:17px;
-  max-width:650px;
-  margin:0;
+.proof {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 64px;
 }
 
-/* =========================
-   CAPABILITIES
-========================= */
+.proof-item {
+  text-align: left;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
 
-.services{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+.proof-item strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
-.card{
-  position:relative;
-  min-height:275px;
-  padding:28px;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.018)
-    );
-  overflow:hidden;
-  transition:.25s ease;
+.proof-item span {
+  color: var(--muted);
+  font-size: 14px;
 }
 
-.card:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  right:-100px;
-  top:-100px;
-  background:
-    radial-gradient(
-      circle,
-      rgba(124,92,255,.18),
-      transparent 68%
-    );
-  opacity:0;
-  transition:.25s;
+/* Sections */
+.section {
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
 }
 
-.card:hover{
-  transform:translateY(-4px);
-  border-color:rgba(124,92,255,.38);
-  box-shadow:var(--shadow);
+.section-head {
+  max-width: 680px;
+  margin-bottom: 56px;
 }
 
-.card:hover:after{
-  opacity:1;
+.kicker {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
 }
 
-.card-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  background:var(--accent-soft);
-  border:1px solid rgba(124,92,255,.2);
-  color:#b7aaff;
-  font-weight:700;
-  margin-bottom:28px;
+.title {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  font-weight: 700;
 }
 
-.card h3{
-  margin:0 0 9px;
-  font-size:19px;
-  letter-spacing:-.02em;
+.lead {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.7;
 }
 
-.card p{
-  margin:0;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.7;
+/* Services/Cards */
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
-/* =========================
-   PROCESS
-========================= */
+.card {
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+}
 
-.process{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
+.card:hover {
+  border-color: var(--accent);
+  background: var(--surface-alt);
+  transform: translateY(-2px);
 }
 
-.process-card{
-  padding:30px;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:var(--surface);
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: rgba(109, 95, 248, 0.1);
+  border: 1px solid rgba(109, 95, 248, 0.2);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
-.process-number{
-  color:#a99cff;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.1em;
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-.process-card h3{
-  font-size:22px;
-  margin:28px 0 8px;
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  flex-grow: 1;
 }
 
-.process-card p{
-  margin:0;
-  color:var(--muted);
-  font-size:14px;
+/* Process */
+.process {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 
-/* =========================
-   ABOUT
-========================= */
+.process-card {
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
 
-.about{
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:70px;
-  align-items:start;
+.process-number {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.about-copy p{
-  color:var(--muted);
-  font-size:16px;
-  line-height:1.8;
-  margin:0 0 18px;
+.process-card h3 {
+  font-size: 20px;
+  margin: 16px 0 12px;
+  font-weight: 600;
 }
 
-.profile{
-  padding:30px;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:
-    linear-gradient(
-      145deg,
-      #10151d,
-      #0b0e14
-    );
+.process-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-.profile-top{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:26px;
+/* About */
+.about {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  align-items: start;
 }
 
-.avatar{
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  background:
-    linear-gradient(
-      135deg,
-      #7c5cff,
-      #4c3eaa
-    );
-  font-weight:750;
+.about-copy p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0 0 16px;
 }
 
-.profile-name{
-  font-weight:700;
+.about-copy p:last-child {
+  margin-bottom: 0;
 }
 
-.profile-role{
-  font-size:13px;
-  color:var(--muted);
+.profile {
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
-.profile-list{
-  display:grid;
-  gap:12px;
+.profile-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.profile-list div{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  padding:12px 0;
-  border-top:1px solid var(--line);
-  font-size:13px;
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
 }
 
-.profile-list span:first-child{
-  color:var(--muted);
+.profile-name {
+  font-weight: 600;
+  font-size: 15px;
 }
 
-.profile-list span:last-child{
-  text-align:right;
+.profile-role {
+  font-size: 13px;
+  color: var(--muted);
 }
 
-/* =========================
-   CONTACT
-========================= */
+.profile-list {
+  display: grid;
+  gap: 0;
+}
 
-.contact{
-  position:relative;
-  overflow:hidden;
-  padding:70px;
-  border:1px solid rgba(124,92,255,.25);
-  border-radius:24px;
-  background:
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(124,92,255,.18),
-      transparent 30%
-    ),
-    linear-gradient(
-      135deg,
-      #10141d,
-      #0a0d13
-    );
+.profile-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
 }
 
-.contact h2{
-  max-width:650px;
-  margin:0 0 14px;
-  font-size:clamp(36px,5vw,58px);
-  line-height:1.03;
-  letter-spacing:-.05em;
+.profile-list div:first-child {
+  border-top: none;
+  padding-top: 0;
 }
 
-.contact p{
-  max-width:570px;
-  color:var(--muted);
-  margin:0 0 28px;
+.profile-list span:first-child {
+  color: var(--muted);
 }
 
-.email{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  color:#d8d2ff;
-  font-size:14px;
-  font-weight:600;
-  margin-top:18px;
+/* Contact */
+.contact {
+  padding: 56px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
-.email:hover{
-  color:white;
+.contact h2 {
+  max-width: 620px;
+  margin: 0 0 16px;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
-/* =========================
-   FOOTER
-========================= */
+.contact p {
+  max-width: 540px;
+  color: var(--muted);
+  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.7;
+}
 
-footer{
-  padding:35px 0;
-  border-top:1px solid var(--line);
+.email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 16px;
+  transition: opacity 0.2s;
 }
 
-.footer{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  color:#687282;
-  font-size:13px;
+.email:hover {
+  opacity: 0.8;
 }
 
-.footer a:hover{
-  color:var(--text);
+/* Footer */
+footer {
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
 }
 
-/* =========================
-   MOBILE
-========================= */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #6b7280;
+  font-size: 13px;
+}
 
-@media(max-width:800px){
+.footer a:hover {
+  color: var(--text);
+}
 
-  .nav-links{
-    display:none;
+/* Mobile */
+@media (max-width: 800px) {
+  .nav-links {
+    display: none;
   }
 
-  .menu{
-    display:block;
+  .menu {
+    display: block;
   }
 
-  .hero{
-    padding:90px 0 75px;
-  }
-
-  .hero h1{
-    font-size:clamp(46px,13vw,68px);
+  .hero {
+    padding: 80px 0 60px;
   }
 
   .proof,
   .services,
   .process,
-  .about{
-    grid-template-columns:1fr;
+  .about {
+    grid-template-columns: 1fr;
   }
 
-  .proof-item{
-    border-right:0;
-    border-bottom:1px solid var(--line);
+  .about {
+    gap: 32px;
   }
 
-  .proof-item:last-child{
-    border-bottom:0;
+  .contact {
+    padding: 36px 28px;
   }
 
-  .card{
-    min-height:auto;
+  .footer {
+    flex-direction: column;
   }
 
-  .about{
-    gap:35px;
+  .nav-links.mobile-open {
+    display: flex;
+    position: absolute;
+    top: 72px;
+    left: 24px;
+    right: 24px;
+    padding: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
 
-  .contact{
-    padding:42px 28px;
-  }
-
-  .footer{
-    flex-direction:column;
-  }
-
-  .nav-links.mobile-open{
-    display:flex;
-    position:absolute;
-    top:76px;
-    left:20px;
-    right:20px;
-    padding:12px;
-    flex-direction:column;
-    align-items:stretch;
-    gap:4px;
-    background:#0d1118;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:14px;
-    box-shadow:0 25px 70px rgba(0,0,0,.45);
-  }
-
-  .nav-links.mobile-open a{
-    padding:12px;
+  .nav-links.mobile-open a {
+    padding: 12px;
   }
 }
 
-@media(prefers-reduced-motion:reduce){
-  html{
-    scroll-behavior:auto;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  *{
-    transition:none!important;
+  * {
+    transition: none !important;
   }
 }
 </style>
@@ -730,520 +559,210 @@ footer{
 <body>
 
 <header class="navbar">
-
   <nav class="nav" aria-label="Primary navigation">
-
     <a class="logo" href="#top">
-      parralax<span>.</span>dev
+      parralax.dev
     </a>
 
     <div class="nav-links">
-
-      <a href="#services">
-        Capabilities
-      </a>
-
-      <a href="#process">
-        Process
-      </a>
-
-      <a href="#about">
-        About
-      </a>
-
-      <a class="nav-cta" href="#contact">
-        Start a project
-      </a>
-
+      <a href="#services">Capabilities</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a class="nav-cta" href="#contact">Start a project</a>
     </div>
 
-    <button
-      class="menu"
-      aria-label="Open menu"
-      onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')"
-    >
+    <button class="menu" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
       ☰
     </button>
-
   </nav>
-
 </header>
-
 
 <main id="top">
 
-<!-- HERO -->
-
-<section class="hero">
-
-  <div class="hero-glow"></div>
-
-  <div class="container">
-
-    <div class="badge">
-      <span class="badge-dot"></span>
-      Independent software studio
-    </div>
-
-    <h1>
-      Turn your data into
-      <span class="gradient">
-        something useful.
-      </span>
-    </h1>
-
-    <p class="hero-copy">
-      Parralax builds practical data systems and custom software
-      around the information your company already has — from raw
-      files to working products.
-    </p>
-
-    <div class="actions">
-
-      <a class="btn btn-primary" href="#contact">
-        Start a project
-        <span style="margin-left:8px">→</span>
-      </a>
-
-      <a class="btn btn-secondary" href="#services">
-        Explore capabilities
-      </a>
-
-    </div>
-
-
-    <div class="proof">
-
-      <div class="proof-item">
-
-        <strong>
-          Built around your data
-        </strong>
-
-        <span>
-          Workflows designed for your actual business.
-        </span>
-
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Independent software studio
       </div>
 
+      <h1>Turn your data into something useful.</h1>
 
-      <div class="proof-item">
-
-        <strong>
-          End-to-end delivery
-        </strong>
-
-        <span>
-          From messy inputs to a usable system.
-        </span>
-
-      </div>
-
-
-      <div class="proof-item">
-
-        <strong>
-          Direct collaboration
-        </strong>
-
-        <span>
-          You work directly with the developer.
-        </span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CAPABILITIES -->
-
-<section class="section" id="services">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="kicker">
-        Capabilities
-      </div>
-
-      <h2 class="title">
-        Software built around the problems
-        your business actually has.
-      </h2>
-
-      <p class="lead">
-        Parralax takes raw information, turns it into
-        structured systems, and delivers software that
-        fits into your existing workflow.
+      <p class="hero-copy">
+        Parralax builds practical data systems and custom software around the information your company already has — from raw files to working products.
       </p>
 
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact">Start a project →</a>
+        <a class="btn btn-secondary" href="#services">Explore capabilities</a>
+      </div>
+
+      <div class="proof">
+        <div class="proof-item">
+          <strong>Built around your data</strong>
+          <span>Workflows designed for your actual business.</span>
+        </div>
+        <div class="proof-item">
+          <strong>End-to-end delivery</strong>
+          <span>From messy inputs to a usable system.</span>
+        </div>
+        <div class="proof-item">
+          <strong>Direct collaboration</strong>
+          <span>You work directly with the developer.</span>
+        </div>
+      </div>
     </div>
+  </section>
 
+  <!-- Capabilities -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">Capabilities</div>
+        <h2 class="title">Software built around the problems your business actually has.</h2>
+        <p class="lead">Parralax takes raw information, turns it into structured systems, and delivers software that fits into your existing workflow.</p>
+      </div>
 
-    <div class="services">
+      <div class="services">
+        <article class="card">
+          <div class="card-icon">01</div>
+          <h3>Data systems</h3>
+          <p>Organize, clean, structure, and prepare business data so it can support reliable software and decision-making.</p>
+        </article>
 
-      <article class="card">
+        <article class="card">
+          <div class="card-icon">02</div>
+          <h3>Custom models</h3>
+          <p>Develop purpose-built models for classification, prediction, detection, language, and other data-driven tasks.</p>
+        </article>
 
-        <div class="card-icon">
-          01
+        <article class="card">
+          <div class="card-icon">03</div>
+          <h3>Production software</h3>
+          <p>Connect the underlying system to a usable application, workflow, or internal tool your team can actually operate.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">How it works</div>
+        <h2 class="title">Simple from the outside. Thorough underneath.</h2>
+        <p class="lead">Every project follows a clear path from understanding the problem to delivering something your company can use.</p>
+      </div>
+
+      <div class="process">
+        <article class="process-card">
+          <span class="process-number">01 — Discover</span>
+          <h3>Understand the problem</h3>
+          <p>We start with the business outcome, your existing workflow, and the information already available to you.</p>
+        </article>
+
+        <article class="process-card">
+          <span class="process-number">02 — Design</span>
+          <h3>Plan the solution</h3>
+          <p>We map out architecture, data flow, and integration points. No surprises, no retrofitting later.</p>
+        </article>
+
+        <article class="process-card">
+          <span class="process-number">03 — Develop</span>
+          <h3>Build and test</h3>
+          <p>We write production-quality code with documentation and testing baked in from day one.</p>
+        </article>
+
+        <article class="process-card">
+          <span class="process-number">04 — Deploy</span>
+          <h3>Launch and support</h3>
+          <p>We deploy the system, train your team, and provide support to make sure everything runs smoothly.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about">
+        <div class="about-copy">
+          <p>
+            Parralax was built by developers who spent years working at data-heavy companies. We've seen the pain of tools that don't fit your workflow, models that don't solve real problems, and systems that fall apart in production.
+          </p>
+          <p>
+            We do the work to understand your business first. That understanding shapes every decision we make—from architecture to deployment. The result is software that actually works for you.
+          </p>
+          <p>
+            We work with companies of all sizes, from startups sorting out their first data pipeline to enterprises building the next generation of their core systems.
+          </p>
         </div>
 
-        <h3>
-          Data systems
-        </h3>
-
-        <p>
-          Organize, clean, structure, and prepare business
-          data so it can support reliable software and
-          decision-making.
-        </p>
-
-      </article>
-
-
-      <article class="card">
-
-        <div class="card-icon">
-          02
-        </div>
-
-        <h3>
-          Custom models
-        </h3>
-
-        <p>
-          Develop purpose-built models for classification,
-          prediction, detection, language, and other
-          data-driven tasks.
-        </p>
-
-      </article>
-
-
-      <article class="card">
-
-        <div class="card-icon">
-          03
-        </div>
-
-        <h3>
-          Production software
-        </h3>
-
-        <p>
-          Connect the underlying system to a usable
-          application, workflow, or internal tool your
-          team can actually operate.
-        </p>
-
-      </article>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PROCESS -->
-
-<section class="section" id="process">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="kicker">
-        How it works
-      </div>
-
-      <h2 class="title">
-        Simple from the outside.
-        Thorough underneath.
-      </h2>
-
-      <p class="lead">
-        Every project follows a clear path from
-        understanding the problem to delivering
-        something your company can use.
-      </p>
-
-    </div>
-
-
-    <div class="process">
-
-      <article class="process-card">
-
-        <span class="process-number">
-          01 — DISCOVER
-        </span>
-
-        <h3>
-          Understand the problem
-        </h3>
-
-        <p>
-          We start with the business outcome,
-          your existing workflow, and the information
-          already available to you.
-        </p>
-
-      </article>
-
-
-      <article class="process-card">
-
-        <span class="process-number">
-          02 — BUILD
-        </span>
-
-        <h3>
-          Structure & develop
-        </h3>
-
-        <p>
-          The data is prepared and the appropriate
-          system or model is built around the
-          requirements of the project.
-        </p>
-
-      </article>
-
-
-      <article class="process-card">
-
-        <span class="process-number">
-          03 — TEST
-        </span>
-
-        <h3>
-          Measure what matters
-        </h3>
-
-        <p>
-          Results are evaluated against useful metrics
-          so the system is improving for the reason
-          it was built.
-        </p>
-
-      </article>
-
-
-      <article class="process-card">
-
-        <span class="process-number">
-          04 — DELIVER
-        </span>
-
-        <h3>
-          Put it to work
-        </h3>
-
-        <p>
-          The finished system is packaged into a
-          practical workflow rather than left as
-          an experiment or prototype.
-        </p>
-
-      </article>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section class="section" id="about">
-
-  <div class="container about">
-
-    <div class="about-copy">
-
-      <div class="kicker">
-        About Parralax
-      </div>
-
-      <h2 class="title">
-        Small studio.
-        Direct communication.
-      </h2>
-
-      <p>
-        Parralax is an independent software studio run
-        by Michael Jimanov. The focus is straightforward:
-        build useful technical systems around real
-        business problems.
-      </p>
-
-      <p>
-        Projects can span the full development pipeline —
-        understanding the problem, preparing data, building
-        the system, evaluating the result, and getting it
-        into a form that can actually be used.
-      </p>
-
-      <p>
-        Because Parralax is intentionally small, clients
-        work directly with the person building their project
-        instead of being passed between layers of an agency.
-      </p>
-
-    </div>
-
-
-    <aside class="profile">
-
-      <div class="profile-top">
-
-        <div class="avatar">
-          MJ
-        </div>
-
-        <div>
-
-          <div class="profile-name">
-            Michael Jimanov
+        <div class="profile">
+          <div class="profile-top">
+            <div class="avatar">M</div>
+            <div>
+              <div class="profile-name">Mikhail Zhymanov</div>
+              <div class="profile-role">Founder & Developer</div>
+            </div>
           </div>
-
-          <div class="profile-role">
-            Founder · Developer
+          <div class="profile-list">
+            <div>
+              <span>Based in</span>
+              <span>San Francisco, CA</span>
+            </div>
+            <div>
+              <span>Expertise</span>
+              <span>ML, Data Systems, APIs</span>
+            </div>
+            <div>
+              <span>Previously</span>
+              <span>Data infrastructure roles</span>
+            </div>
           </div>
-
         </div>
-
       </div>
-
-
-      <div class="profile-list">
-
-        <div>
-          <span>Focus</span>
-          <span>Data & software</span>
-        </div>
-
-        <div>
-          <span>Approach</span>
-          <span>Practical, direct</span>
-        </div>
-
-        <div>
-          <span>Projects</span>
-          <span>Custom-built</span>
-        </div>
-
-        <div>
-          <span>Based in</span>
-          <span>Colorado</span>
-        </div>
-
-      </div>
-
-    </aside>
-
-  </div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section class="section" id="contact">
-
-  <div class="container">
-
-    <div class="contact">
-
-      <div class="kicker">
-        Start a project
-      </div>
-
-      <h2>
-        Have a problem worth
-        building around?
-      </h2>
-
-      <p>
-        Send over what you're trying to accomplish,
-        what information you have, and what the
-        finished result should look like. We'll figure
-        out the technical path from there.
-      </p>
-
-      <a
-        class="btn btn-primary"
-        href="mailto:michaelzhymanov@gmail.com"
-      >
-        Get in touch
-        <span style="margin-left:8px">→</span>
-      </a>
-
-      <br>
-
-      <a
-        class="email"
-        href="mailto:michaelzhymanov@gmail.com"
-      >
-        michaelzhymanov@gmail.com
-      </a>
-
     </div>
+  </section>
 
-  </div>
-
-</section>
+  <!-- Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="contact">
+        <h2>Ready to turn your data into advantage?</h2>
+        <p>Let's talk about your project. We work directly with you to understand the problem and build the right solution.</p>
+        <a class="email" href="mailto:hello@parralax.dev">
+          hello@parralax.dev →
+        </a>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-
-<!-- FOOTER -->
-
 <footer>
-
-  <div class="container footer">
-
-    <span>
-      © <span id="year"></span> Parralax
-    </span>
-
-    <a href="mailto:michaelzhymanov@gmail.com">
-      michaelzhymanov@gmail.com
-    </a>
-
+  <div class="container">
+    <div class="footer">
+      <div>&copy; 2026 Parralax. All rights reserved.</div>
+      <div style="display: flex; gap: 24px;">
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
   </div>
-
 </footer>
 
-
 <script>
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-
-document.querySelectorAll(".nav-links a").forEach(
-  function(link){
-
-    link.addEventListener("click",function(){
-
-      document
-        .querySelector(".nav-links")
-        .classList
-        .remove("mobile-open");
-
-    });
-
-  }
-);
-
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href !== '#' && document.querySelector(href)) {
+      e.preventDefault();
+    }
+  });
+});
 </script>
 
 </body>
