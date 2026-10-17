@@ -3,159 +3,134 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Parralax — Dataset sourcing and evaluation for machine learning</title>
-<meta name="description" content="Parralax helps teams source, evaluate and prepare datasets for machine learning: dataset sourcing, licensing support, quality assessment and technical consulting.">
+<title>Parralax | Dataset sourcing and evaluation for machine learning</title>
+<meta name="description" content="Parralax finds, vets and prepares datasets for machine learning teams: dataset sourcing, license review, quality assessment, data preparation and technical consulting.">
+<meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#111210">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111210'/%3E%3Cpath d='M6 9h14l-4 14H2z' fill='none' stroke='%2392958B' stroke-width='2' transform='translate(4 0)'/%3E%3Cpath d='M12 9h14l-4 14H8z' fill='%23C5D4A0' fill-opacity='.9' transform='translate(2 0)'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111210'/%3E%3Cpath d='M7 9h14l-4 14H3z' fill='none' stroke='%2392958B' stroke-width='1.6'/%3E%3Cpath d='M14 9h14l-4 14H10z' fill='%23C5D4A0'/%3E%3C/svg%3E">
 <style>
 :root{
   --bg:#111210;--surface:#171815;--text:#E9EAE4;--muted:#92958B;--accent:#C5D4A0;--line:#303129;
   --serif:ui-serif,"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
-  --wrap:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+html{scroll-behavior:smooth;scroll-padding-top:64px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
 .skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:#111210;padding:8px 14px;z-index:100}
 .skip:focus{left:8px}
-.label{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.label b{color:var(--accent);font-weight:500;margin-right:10px}
-h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;line-height:1.12}
-h2{font-size:clamp(30px,4vw,46px);max-width:18ch}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border:1px solid var(--line);font:500 14px/1 var(--sans);transition:background .2s,color .2s,border-color .2s}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#111210}
-.btn.primary:hover{background:var(--text);border-color:var(--text)}
-.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
-.btn svg{width:14px;height:14px}
 
-/* Nav */
-header{position:sticky;top:0;z-index:50;background:rgba(17,18,16,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{display:flex;align-items:center;gap:12px;font:500 18px/1 var(--serif);letter-spacing:.01em}
-.brand svg{width:28px;height:28px}
-.nav ul{display:flex;gap:34px;list-style:none;align-items:center}
-.nav ul a:not(.btn){font-size:14px;color:var(--muted);transition:color .2s}
-.nav ul a:not(.btn):hover{color:var(--text)}
-.nav .btn{padding:10px 16px;font-size:13px}
-.toggle{display:none;background:none;border:1px solid var(--line);color:var(--text);width:42px;height:42px;cursor:pointer}
-.toggle span,.toggle span::before,.toggle span::after{display:block;width:16px;height:1.5px;background:currentColor;margin:auto;position:relative;transition:transform .25s,background .25s}
-.toggle span::before,.toggle span::after{content:"";position:absolute;left:0}
-.toggle span::before{top:-5px}.toggle span::after{top:5px}
-.toggle[aria-expanded=true] span{background:transparent}
-.toggle[aria-expanded=true] span::before{transform:translateY(5px) rotate(45deg)}
-.toggle[aria-expanded=true] span::after{transform:translateY(-5px) rotate(-45deg)}
+/* header */
+header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font:400 20px/1 var(--serif);letter-spacing:.01em}
+.brand svg{width:26px;height:26px;flex:none}
+.nav ul{display:flex;align-items:center;gap:32px;list-style:none;font-size:14px}
+.nav ul a{text-decoration:none;color:var(--muted);transition:color .15s}
+.nav ul a:hover{color:var(--text)}
+.nav ul a.mail{color:var(--text);border:1px solid var(--line);padding:8px 14px;transition:border-color .15s}
+.nav ul a.mail:hover{border-color:var(--accent)}
+.toggle{display:none;background:none;border:1px solid var(--line);color:var(--text);font:14px var(--sans);padding:8px 14px;cursor:pointer}
 
-/* Hero */
-.hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;min-height:min(86vh,780px);padding-top:72px;padding-bottom:72px}
-.hero h1{font-size:clamp(40px,5.6vw,72px);margin:26px 0 28px}
-.hero h1 em{font-style:italic;color:var(--accent)}
-.hero p.lead{color:var(--muted);font-size:19px;max-width:50ch;margin-bottom:38px}
-.cta{display:flex;flex-wrap:wrap;gap:14px}
-.fig{position:relative;border:1px solid var(--line);background:var(--surface);aspect-ratio:1/1;max-width:520px;width:100%;justify-self:end}
-.fig svg{width:100%;height:100%;display:block}
-.fig .layer{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-.fig figcaption{position:absolute;left:14px;bottom:12px;right:14px;display:flex;justify-content:space-between;font:11px/1 var(--mono);color:var(--muted);letter-spacing:.08em}
+/* hero */
+.hero{padding:96px 0 88px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:end}
+h1{font:400 clamp(38px,5vw,64px)/1.07 var(--serif);letter-spacing:-.02em}
+.hero p{color:var(--muted);font-size:18px;max-width:46ch;margin:28px 0 36px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:28px}
+.btn{display:inline-block;background:var(--accent);color:#111210;padding:13px 22px;text-decoration:none;font-weight:500;font-size:15px;transition:background .15s}
+.btn:hover{background:var(--text)}
+.link{color:var(--text);font-size:15px;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:6px;transition:text-decoration-color .15s}
+.link:hover{text-decoration-color:var(--accent)}
+figure svg{display:block;width:100%;height:auto}
+figcaption{margin-top:12px;font-size:13px;color:var(--muted);max-width:52ch}
+figcaption b{font-weight:500;color:var(--text)}
+.f-line{stroke:var(--muted);stroke-opacity:.55;stroke-width:.8;fill:none}
+.f-lineb{stroke:var(--accent);stroke-opacity:.75;stroke-width:.8;fill:none}
+.f-txt{font:11px var(--sans);fill:var(--muted)}
 
-/* Sections */
-section{padding:120px 0;border-bottom:1px solid var(--line)}
-.head{display:grid;grid-template-columns:1fr 2fr;gap:40px;margin-bottom:64px;align-items:start}
-.head p{color:var(--muted);max-width:56ch;margin-top:20px}
+/* sections */
+.sec{border-top:1px solid var(--line);padding:88px 0 96px}
+.sec .wrap{display:grid;grid-template-columns:190px 1fr;gap:48px}
+.sec h2{font:500 13px/1.5 var(--sans);color:var(--muted);padding-top:9px}
+.sec h2::before{content:"";display:inline-block;width:7px;height:7px;background:var(--accent);margin-right:10px;transform:translateY(-1px)}
+.lede{font:400 clamp(22px,2.6vw,30px)/1.35 var(--serif);letter-spacing:-.01em;max-width:36ch;margin-bottom:56px}
 
-/* Services */
-.svc{list-style:none;border-top:1px solid var(--line)}
-.svc li{display:grid;grid-template-columns:80px 1fr 1.3fr;gap:32px;padding:34px 0;border-bottom:1px solid var(--line);transition:background .25s}
-.svc li:hover{background:var(--surface)}
-.svc .n{font:13px/1.9 var(--mono);color:var(--accent);padding-left:6px}
-.svc h3{font-size:26px}
-.svc p{color:var(--muted)}
-.svc .out{display:block;margin-top:12px;font:12px/1.6 var(--mono);color:var(--text);letter-spacing:.03em}
-.svc .out::before{content:"Deliverable → ";color:var(--accent)}
+/* services */
+.svc div.row{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:26px 0;border-top:1px solid var(--line)}
+.svc div.row:last-child{border-bottom:1px solid var(--line)}
+.svc h3{font:400 21px/1.3 var(--serif)}
+.svc p{color:var(--muted);max-width:60ch}
 
-/* Approach */
+/* approach */
 #approach{background:var(--surface)}
-.steps{position:relative;display:grid;gap:0;margin-left:8px}
-.steps::before{content:"";position:absolute;left:11px;top:10px;bottom:10px;border-left:1px dashed var(--line)}
-.step{position:relative;display:grid;grid-template-columns:70px 1fr 1fr;gap:28px;padding:0 0 46px}
-.step:last-child{padding-bottom:0}
-.step i{position:relative;z-index:1;width:23px;height:23px;border:1px solid var(--accent);background:var(--surface);display:grid;place-items:center;transform:rotate(45deg);margin-top:6px}
-.step i::after{content:"";width:7px;height:7px;background:var(--accent)}
-.step h3{font-size:24px}
-.step p{color:var(--muted)}
-.step .tag{font:11px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
-.note{margin-top:64px;border:1px solid var(--line);padding:28px 32px;display:grid;grid-template-columns:auto 1fr;gap:24px;background:var(--bg)}
-.note p{color:var(--muted);max-width:75ch}
-.note strong{color:var(--text);font-weight:500}
+ol.pr{list-style:none;counter-reset:p;max-width:64ch;margin-bottom:72px}
+ol.pr li{counter-increment:p;display:grid;grid-template-columns:40px 1fr;padding:20px 0;border-top:1px solid var(--line);color:var(--muted)}
+ol.pr li:last-child{border-bottom:1px solid var(--line)}
+ol.pr li::before{content:counter(p) ".";font:400 18px/1.5 var(--serif);color:var(--accent)}
+ol.pr b{color:var(--text);font-weight:500}
+.cap{font:400 21px/1.3 var(--serif);margin-bottom:20px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font-weight:400;font-size:13px;color:var(--muted);text-align:left;padding:0 24px 12px 0}
+td{padding:16px 24px 16px 0;border-top:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{font:400 18px/1.4 var(--serif);color:var(--text);white-space:nowrap}
+tr:last-child td{border-bottom:1px solid var(--line)}
 
-/* About */
-.about{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
-.id{border:1px solid var(--line);padding:30px;background:var(--surface);font:13px/1.7 var(--mono)}
-.id dt{color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-size:11px;margin-top:20px}
-.id dt:first-child{margin-top:0}
-.id dd{color:var(--text)}
-.prose p{color:var(--muted);margin-bottom:22px;max-width:60ch}
-.prose p:first-of-type{font:400 24px/1.4 var(--serif);color:var(--text);letter-spacing:-.01em}
-.prose strong{color:var(--text);font-weight:500}
+/* about */
+.about{display:grid;grid-template-columns:1fr 220px;gap:56px}
+.about p{color:var(--muted);max-width:58ch;margin-bottom:20px}
+.about p.lede{color:var(--text);margin-bottom:28px}
+.about dl{font-size:14px;border-left:1px solid var(--line);padding-left:20px;align-self:start}
+.about dt{color:var(--muted);font-size:12px;margin-top:16px}
+.about dt:first-child{margin-top:0}
 
-/* Contact */
-.contact{display:grid;grid-template-columns:1.1fr 1fr;gap:80px}
-.mail{display:inline-block;margin:32px 0 8px;font:400 clamp(24px,3.2vw,38px)/1.2 var(--serif);border-bottom:1px solid var(--accent);padding-bottom:6px;transition:color .2s}
-.mail:hover{color:var(--accent)}
-.contact > div > p{color:var(--muted);max-width:50ch}
-.checks{border:1px solid var(--line);padding:32px;background:var(--surface)}
-.checks ul{list-style:none;margin-top:22px}
-.checks li{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
-.checks li::before{content:"";flex:none;width:7px;height:7px;margin-top:9px;background:var(--accent);transform:rotate(45deg)}
-.checks li b{color:var(--text);font-weight:500}
+/* contact */
+.mailto{display:inline-block;font:400 clamp(26px,4.2vw,50px)/1.15 var(--serif);letter-spacing:-.015em;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1px;text-underline-offset:10px;word-break:break-word;margin-bottom:36px;transition:color .15s}
+.mailto:hover{color:var(--accent)}
+.contact p{color:var(--muted);max-width:56ch;margin-bottom:16px}
+.contact p strong{color:var(--text);font-weight:500}
 
-/* Footer */
-footer{padding:64px 0 40px}
-.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px}
-.foot p{color:var(--muted);font-size:15px;max-width:38ch;margin-top:18px}
-.foot h4{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+/* footer */
+footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.foot p{color:var(--muted);max-width:34ch;margin-top:14px}
+.foot h4{font-weight:500;font-size:12px;color:var(--muted);margin-bottom:14px}
 .foot ul{list-style:none}
-.foot li{margin-bottom:10px;font-size:15px}
+.foot li{margin-bottom:8px}
+.foot li a{text-decoration:none}
 .foot li a:hover{color:var(--accent)}
-.legal{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:12px/1.5 var(--mono);color:var(--muted)}
+.legal{margin-top:48px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
-/* Reveal */
-.rv{opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s}
-.rv.in{opacity:1;transform:none}
-
-@media (max-width:960px){
-  section{padding:84px 0}
-  .hero .wrap,.head,.about,.contact{grid-template-columns:1fr;gap:40px}
-  .hero .wrap{min-height:0}
-  .fig{justify-self:start}
-  .svc li{grid-template-columns:48px 1fr;gap:12px 18px}
-  .svc li p{grid-column:2}
-  .step{grid-template-columns:48px 1fr;gap:6px 14px}
-  .step p{grid-column:2}
-  .foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1/-1}
+@media (max-width:900px){
+  .hero{padding:64px 0}
+  .hero .wrap,.sec .wrap,.about{grid-template-columns:1fr;gap:32px}
+  .sec{padding:64px 0 72px}
+  .sec h2{padding-top:0}
+  .lede{margin-bottom:40px}
+  .svc div.row{grid-template-columns:1fr;gap:8px}
+  .about dl{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}
+  .foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}
+  table,tbody,tr,td{display:block}
+  thead{position:absolute;left:-999px}
+  tr{border-top:1px solid var(--line);padding:16px 0}
+  td{border:0!important;padding:3px 0}
+  td:first-child{white-space:normal}
+  td[data-l]::before{content:attr(data-l) ": ";font-size:12px;color:var(--muted);opacity:.7}
 }
-@media (max-width:760px){
-  body{font-size:16px}
+@media (max-width:720px){
   .wrap{padding:0 20px}
   .toggle{display:block}
-  .nav ul{position:absolute;left:0;right:0;top:64px;background:var(--bg);flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--line);padding:8px 20px 20px;display:none}
+  .nav ul{display:none;position:absolute;top:60px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:4px 20px 16px}
   .nav ul.open{display:flex}
   .nav ul li{border-bottom:1px solid var(--line)}
-  .nav ul li:last-child{border:0;padding-top:16px}
-  .nav ul a:not(.btn){display:block;padding:16px 0;font-size:16px}
-  .nav ul .btn{width:100%;justify-content:center;padding:14px}
-  .note{grid-template-columns:1fr;padding:22px}
-  .legal{flex-direction:column}
+  .nav ul li:last-child{border:0;padding-top:14px}
+  .nav ul a{display:block;padding:14px 0;font-size:16px}
+  .nav ul a.mail{text-align:center;padding:12px}
 }
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{transition:none!important;animation:none!important}
-  .rv{opacity:1;transform:none}
-}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
 <body>
@@ -163,137 +138,135 @@ footer{padding:64px 0 40px}
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Parralax home">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 9h14l-4 14H1z" fill="none" stroke="#92958B" stroke-width="1.5" transform="translate(3 0)"/><path d="M12 9h14l-4 14H8z" fill="#C5D4A0" transform="translate(2 0)"/></svg>
+    <a class="brand" href="#top" aria-label="Parralax, back to top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 9h14l-4 14H3z" fill="none" stroke="#92958B" stroke-width="1.6"/><path d="M14 9h14l-4 14H10z" fill="#C5D4A0"/></svg>
       Parralax
     </a>
-    <button class="toggle" aria-expanded="false" aria-controls="menu" aria-label="Toggle menu"><span></span></button>
+    <button class="toggle" aria-expanded="false" aria-controls="menu">Menu</button>
     <ul id="menu">
       <li><a href="#services">Services</a></li>
       <li><a href="#approach">Approach</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a class="btn ghost" href="mailto:michaelzhymanov@gmail.com?subject=Parralax%20inquiry">Start a conversation</a></li>
+      <li><a class="mail" href="mailto:michaelzhymanov@gmail.com?subject=Parralax%20inquiry">Email us</a></li>
     </ul>
   </div>
 </header>
 
 <main id="main">
-<div id="top"></div>
-<section class="hero" style="padding:0">
+<div id="top" class="hero">
   <div class="wrap">
     <div>
-      <p class="label"><b>00</b>Data infrastructure for machine learning</p>
-      <h1>The model is only as good as <em>the data</em> you can trust.</h1>
-      <p class="lead">Parralax helps teams find, evaluate and prepare datasets for machine learning. We check what the data actually contains, where it came from, and whether it fits the problem, and we tell you plainly where it falls short.</p>
-      <div class="cta">
-        <a class="btn primary" href="#contact">Describe your data needs <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg></a>
-        <a class="btn ghost" href="#services">See services</a>
+      <h1>Dataset sourcing and evaluation for machine learning teams.</h1>
+      <p>Parralax finds candidate datasets for a given task, reads their licenses, and tests them against what your model needs. You get a written assessment of what each dataset can and cannot support.</p>
+      <div class="actions">
+        <a class="btn" href="#contact">Describe your project</a>
+        <a class="link" href="#services">What we do</a>
       </div>
     </div>
-    <figure class="fig" id="fig" aria-label="Diagram: two offset lattices of data points, one raw and one filtered, illustrating parallax between a requirement and the data available.">
-      <svg viewBox="0 0 520 520" role="img" aria-hidden="true">
-        <defs>
-          <pattern id="g" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#303129" stroke-width=".6"/></pattern>
-        </defs>
-        <rect width="520" height="520" fill="url(#g)" opacity=".7"/>
-        <g class="layer" data-d="6" fill="#92958B" opacity=".55" id="l1"></g>
-        <g class="layer" data-d="16" id="l2"></g>
-        <g class="layer" data-d="-10">
-          <path d="M120 130h280l-70 260H50z" fill="none" stroke="#92958B" stroke-width="1" stroke-dasharray="3 5"/>
-          <path d="M170 130h280l-70 260H100z" fill="#C5D4A0" fill-opacity=".07" stroke="#C5D4A0" stroke-width="1.2"/>
-        </g>
-        <g font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#92958B" letter-spacing="1">
-          <text x="26" y="40">REQUIREMENT</text><text x="26" y="486">AVAILABLE DATA</text>
-          <text x="394" y="40" fill="#C5D4A0">SUITABLE</text>
-        </g>
+    <figure>
+      <svg viewBox="0 0 640 520" role="img" aria-labelledby="figt">
+        <title id="figt">Diagram of parallax: two viewpoints, A and B, looking at three objects at different depths against a distant reference line. Nearer objects shift more between the two views.</title>
+        <!-- distant reference with ticks -->
+        <line class="f-line" x1="60" y1="40" x2="600" y2="40"/>
+        <line x1="60" y1="44" x2="600" y2="44" stroke="#92958B" stroke-opacity=".5" stroke-width="7" stroke-dasharray="1 19"/>
+        <text class="f-txt" x="60" y="22">Distant reference</text>
+        <!-- sight lines from A -->
+        <line class="f-line" x1="250" y1="480" x2="185" y2="40"/>
+        <line class="f-line" x1="250" y1="480" x2="338" y2="40"/>
+        <line class="f-line" x1="250" y1="480" x2="543" y2="40"/>
+        <!-- sight lines from B -->
+        <line class="f-lineb" x1="390" y1="480" x2="144" y2="40"/>
+        <line class="f-lineb" x1="390" y1="480" x2="232" y2="40"/>
+        <line class="f-lineb" x1="390" y1="480" x2="273" y2="40"/>
+        <!-- projections -->
+        <g fill="#92958B"><circle cx="185" cy="40" r="2.5"/><circle cx="338" cy="40" r="2.5"/><circle cx="543" cy="40" r="2.5"/></g>
+        <g fill="#C5D4A0"><circle cx="144" cy="40" r="2.5"/><circle cx="232" cy="40" r="2.5"/><circle cx="273" cy="40" r="2.5"/></g>
+        <!-- objects -->
+        <g fill="#111210" stroke="#E9EAE4" stroke-width="1.2"><circle cx="200" cy="140" r="5"/><circle cx="300" cy="230" r="5"/><circle cx="350" cy="330" r="5"/></g>
+        <text class="f-txt" x="212" y="136">Dataset</text>
+        <!-- baseline -->
+        <line class="f-line" x1="250" y1="480" x2="390" y2="480"/>
+        <line class="f-line" x1="250" y1="472" x2="250" y2="488"/><line class="f-line" x1="390" y1="472" x2="390" y2="488"/>
+        <text class="f-txt" x="320" y="500" text-anchor="middle">Baseline</text>
+        <text class="f-txt" x="250" y="470" text-anchor="end" dx="-10">A: the requirement</text>
+        <text class="f-txt" x="390" y="470" dx="10" style="fill:#C5D4A0">B: the source</text>
       </svg>
-      <figcaption><span>Δ requirement / source</span><span>fig. 01</span></figcaption>
+      <figcaption><b>Fig. 1.</b> Seen from the task, a dataset can look suitable. Seen from where the data was collected, it can look different. Our work is measuring that difference.</figcaption>
     </figure>
   </div>
-</section>
+</div>
 
-<section id="services">
+<section class="sec" id="services" aria-labelledby="h-services">
   <div class="wrap">
-    <div class="head rv">
-      <p class="label"><b>01</b>Services</p>
-      <div>
-        <h2>Five ways we help with the data side of ML.</h2>
-        <p>Each engagement is scoped around a specific question: what data do you need, and is what you have good enough?</p>
+    <h2 id="h-services">Services</h2>
+    <div>
+      <p class="lede">We find, vet and prepare the data a model is trained and tested on.</p>
+      <div class="svc">
+        <div class="row"><h3>Dataset sourcing</h3><p>Given a task and its constraints, we search public, academic and commercial sources and return candidates with notes on size, modality, labeling method and known issues.</p></div>
+        <div class="row"><h3>Licensing and acquisition support</h3><p>We read the terms attached to each dataset and summarize restrictions on commercial use, redistribution and derived models. We can also help draft questions for data providers. We are not lawyers, so the summary is meant for you or your counsel to review.</p></div>
+        <div class="row"><h3>Dataset quality assessment</h3><p>We sample and test for duplicates, label errors, class balance, overlap between training and test splits, and how closely the data matches your deployment conditions. You receive a written report with examples.</p></div>
+        <div class="row"><h3>Data preparation</h3><p>Cleaning, deduplication, format conversion and split design, delivered as documented Python scripts you can rerun. The output loads directly into a PyTorch pipeline.</p></div>
+        <div class="row"><h3>Technical consulting</h3><p>Advice on baselines, evaluation design and model choice for computer vision and transformer-based work, including when collecting different data is a better use of time than changing the model.</p></div>
       </div>
-    </div>
-    <ul class="svc rv">
-      <li><span class="n">01</span><h3>Dataset sourcing</h3><div><p>We translate your modelling task into concrete data requirements (modality, volume, label type, coverage) and search public, academic and commercial sources for candidates.</p><span class="out">Shortlist of datasets with fit notes</span></div></li>
-      <li><span class="n">02</span><h3>Licensing &amp; acquisition support</h3><div><p>We read dataset terms, flag restrictions on commercial use, redistribution and derivatives, and help you prepare questions for providers. This is technical support, not legal advice.</p><span class="out">License summary and open questions for counsel</span></div></li>
-      <li><span class="n">03</span><h3>Dataset quality assessment</h3><div><p>We inspect samples and run checks for duplicates, label noise, class imbalance, leakage between splits, and distribution gaps against your target use.</p><span class="out">Written report with evidence and examples</span></div></li>
-      <li><span class="n">04</span><h3>Data preparation</h3><div><p>Cleaning, deduplication, format conversion, split design and reproducible preprocessing scripts in Python, ready to plug into a PyTorch pipeline.</p><span class="out">Versioned scripts and a documented dataset</span></div></li>
-      <li><span class="n">05</span><h3>Technical ML consulting</h3><div><p>Practical input on model choice, baselines and evaluation design for vision and transformer-based tasks, including whether more data or a different approach is the better investment.</p><span class="out">Short memo with a recommended next step</span></div></li>
-    </ul>
-  </div>
-</section>
-
-<section id="approach">
-  <div class="wrap">
-    <div class="head rv">
-      <p class="label"><b>02</b>Approach</p>
-      <div>
-        <h2>Start with the problem. Let the data earn its place.</h2>
-        <p>A short, repeatable process that keeps decisions grounded in evidence.</p>
-      </div>
-    </div>
-    <div class="steps">
-      <div class="step rv"><i></i><div><span class="tag">Step 1</span><h3>Understand the requirement</h3></div><p>What will the model do, on what inputs, and how will success be measured? Vague data requests produce vague results, so we pin this down first.</p></div>
-      <div class="step rv"><i></i><div><span class="tag">Step 2</span><h3>Find appropriate sources</h3></div><p>We look for relevant data with licensing terms that match your intended use, and we record where each candidate came from.</p></div>
-      <div class="step rv"><i></i><div><span class="tag">Step 3</span><h3>Evaluate quality and suitability</h3></div><p>We inspect real samples and run measurable checks, rather than trusting a dataset's description.</p></div>
-      <div class="step rv"><i></i><div><span class="tag">Step 4</span><h3>Report limitations openly</h3></div><p>Every dataset has gaps. You receive a clear account of what the data can and cannot support, including when the answer is "this is not a good fit."</p></div>
-      <div class="step rv"><i></i><div><span class="tag">Step 5</span><h3>Choose the simplest thing that works</h3></div><p>If a filtered public dataset and a baseline model solve the problem, we say so. Complexity has to justify itself.</p></div>
-    </div>
-    <div class="note rv">
-      <span class="label">Principle</span>
-      <p><strong>We don't promise outcomes we can't verify.</strong> Our findings are tied to the samples and checks we actually ran, and we document how, so your team can reproduce or challenge them.</p>
     </div>
   </div>
 </section>
 
-<section id="about">
+<section class="sec" id="approach" aria-labelledby="h-approach">
   <div class="wrap">
-    <div class="head rv">
-      <p class="label"><b>03</b>About</p>
-      <h2>A small, hands-on practice.</h2>
+    <h2 id="h-approach">Approach</h2>
+    <div>
+      <p class="lede">Dataset problems usually surface after training, when they are expensive to trace. We move that work to the start.</p>
+      <ol class="pr">
+        <li><span><b>Requirements first.</b> We write down the task, the input conditions, the labels needed and the metric before looking at any data.</span></li>
+        <li><span><b>Provenance and terms.</b> Each candidate gets a record of where it came from and what its license allows.</span></li>
+        <li><span><b>Look at the data.</b> We read samples by hand and run the checks below. Dataset cards and paper abstracts are claims to verify.</span></li>
+        <li><span><b>State the limits.</b> The report says what was tested, what was not, and where we are unsure.</span></li>
+        <li><span><b>Prefer the simple option.</b> If a cleaned public dataset and a standard baseline are enough, that is the recommendation.</span></li>
+      </ol>
+      <p class="cap">What we check</p>
+      <table>
+        <thead><tr><th scope="col">Check</th><th scope="col">What we look at</th><th scope="col">Why it matters</th></tr></thead>
+        <tbody>
+          <tr><td>Provenance</td><td data-l="Looks at">Source, collection method, date range.</td><td data-l="Why">Determines what the data represents and whether it can be reused.</td></tr>
+          <tr><td>License</td><td data-l="Looks at">Commercial use, redistribution, derived models, attribution.</td><td data-l="Why">Some datasets are licensed for research only.</td></tr>
+          <tr><td>Duplicates</td><td data-l="Looks at">Exact and near-duplicate samples, within and across splits.</td><td data-l="Why">Overlap between train and test sets inflates results.</td></tr>
+          <tr><td>Labels</td><td data-l="Looks at">Manual spot checks, ambiguous classes, annotation method.</td><td data-l="Why">Label noise limits the accuracy a model can reach.</td></tr>
+          <tr><td>Balance and coverage</td><td data-l="Looks at">Class frequencies, rare conditions, missing groups.</td><td data-l="Why">Models do worst on what they rarely see.</td></tr>
+          <tr><td>Distribution match</td><td data-l="Looks at">Comparison with your real input conditions.</td><td data-l="Why">Evaluation only means something if the data resembles deployment.</td></tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+</section>
+
+<section class="sec" id="about" aria-labelledby="h-about">
+  <div class="wrap">
+    <h2 id="h-about">About</h2>
     <div class="about">
-      <dl class="id rv">
-        <dt>Founder</dt><dd>Michael Zhymanov</dd>
-        <dt>Focus</dt><dd>Datasets for machine learning</dd>
-        <dt>Working in</dt><dd>Python, PyTorch</dd>
-        <dt>Familiar with</dt><dd>Neural networks, transformers, computer vision</dd>
-        <dt>Contact</dt><dd><a href="mailto:michaelzhymanov@gmail.com" style="border-bottom:1px solid var(--accent)">michaelzhymanov@gmail.com</a></dd>
-      </dl>
-      <div class="prose rv">
-        <p>Parralax was founded by a machine learning developer who builds and trains models, and who has seen how much of a project's outcome is decided before training starts.</p>
-        <p>My hands-on work is in <strong>Python and PyTorch</strong>, covering neural networks, <strong>transformers</strong> and <strong>computer vision</strong>. That means I evaluate datasets from the perspective of someone who has to train on them: label quality, split hygiene, and whether the distribution matches the task.</p>
-        <p>Parralax is a new, small practice. You will work directly with the person doing the analysis, and I will tell you early if a project is outside what I can do well.</p>
+      <div>
+        <p class="lede">Parralax is run by Michael Zhymanov, a machine learning developer.</p>
+        <p>I write and train models in Python and PyTorch, mostly transformer-based models and computer vision. That work showed me how much of a result is decided by the dataset: how it was collected, how it was labeled, and how the splits were made.</p>
+        <p>Parralax applies that to selecting and evaluating data for other people's projects. The company is new, and I do the work myself. If your problem is outside what I can do well, I will say so at the start.</p>
       </div>
+      <dl>
+        <dt>Languages and tools</dt><dd>Python, PyTorch</dd>
+        <dt>Areas</dt><dd>Neural networks, transformers, computer vision</dd>
+        <dt>Email</dt><dd><a href="mailto:michaelzhymanov@gmail.com" style="word-break:break-all">michaelzhymanov@gmail.com</a></dd>
+      </dl>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="wrap contact">
-    <div class="rv">
-      <p class="label"><b>04</b>Contact</p>
-      <h2 style="margin-top:26px">Tell us what you're trying to build.</h2>
-      <a class="mail" href="mailto:michaelzhymanov@gmail.com?subject=Parralax%20inquiry&amp;body=Project%20summary%3A%0A%0AData%20needed%20(type%2C%20volume%2C%20labels)%3A%0A%0AIntended%20use%20(research%20%2F%20commercial)%3A%0A%0ATimeline%3A%0A">michaelzhymanov@gmail.com</a>
-      <p>A few sentences is enough to start. If the problem is better solved another way, you'll get an honest answer.</p>
-    </div>
-    <div class="checks rv">
-      <span class="label">Useful to include</span>
-      <ul>
-        <li><span><b>The task.</b> What the model should do and on what kind of input.</span></li>
-        <li><span><b>The data.</b> What you have, what is missing, rough volume.</span></li>
-        <li><span><b>The constraints.</b> Licensing, privacy, budget and timeline.</span></li>
-        <li><span><b>The unknowns.</b> Where you're unsure and what worries you.</span></li>
-      </ul>
+<section class="sec contact" id="contact" aria-labelledby="h-contact">
+  <div class="wrap">
+    <h2 id="h-contact">Contact</h2>
+    <div>
+      <p class="lede">Send a short description of what you are building and what data you need.</p>
+      <a class="mailto" href="mailto:michaelzhymanov@gmail.com?subject=Parralax%20inquiry&amp;body=What%20the%20model%20should%20do%3A%0A%0AData%20you%20have%20or%20have%20tried%3A%0A%0ALicensing%20or%20privacy%20constraints%3A%0A%0ATimeline%3A%0A">michaelzhymanov@gmail.com</a>
+      <p><strong>Useful to include:</strong> what the model should do, what data you already have or have tried, any licensing or privacy constraints, and your timeline.</p>
+      <p>Partial answers are fine. If a project is better solved another way, we will tell you.</p>
     </div>
   </div>
 </section>
@@ -303,66 +276,33 @@ footer{padding:64px 0 40px}
   <div class="wrap">
     <div class="foot">
       <div>
-        <a class="brand" href="#top" aria-label="Parralax home">
-          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 9h14l-4 14H1z" fill="none" stroke="#92958B" stroke-width="1.5" transform="translate(3 0)"/><path d="M12 9h14l-4 14H8z" fill="#C5D4A0" transform="translate(2 0)"/></svg>
+        <a class="brand" href="#top" aria-label="Parralax, back to top">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 9h14l-4 14H3z" fill="none" stroke="#92958B" stroke-width="1.6"/><path d="M14 9h14l-4 14H10z" fill="#C5D4A0"/></svg>
           Parralax
         </a>
-        <p>Dataset sourcing, evaluation and preparation for machine learning teams.</p>
+        <p>Dataset sourcing, evaluation and preparation for machine learning.</p>
       </div>
-      <nav aria-label="Footer"><h4>Navigate</h4>
+      <nav aria-label="Footer"><h4>Site</h4>
         <ul><li><a href="#services">Services</a></li><li><a href="#approach">Approach</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
       </nav>
       <div><h4>Contact</h4>
         <ul><li><a href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a></li><li>parralax.dev</li></ul>
       </div>
     </div>
-    <div class="legal"><span>© <span id="yr">2026</span> Parralax. All rights reserved.</span><span>Nothing on this site is legal advice.</span></div>
+    <div class="legal"><span>&copy; <span id="yr">2026</span> Parralax</span><span>Nothing on this site is legal advice.</span></div>
   </div>
 </footer>
 
 <script>
 (function(){
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.getElementById('yr').textContent=new Date().getFullYear();
-
-  // Mobile nav
   var t=document.querySelector('.toggle'),m=document.getElementById('menu');
-  function close(){m.classList.remove('open');t.setAttribute('aria-expanded','false')}
-  t.addEventListener('click',function(){var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});
+  function close(){m.classList.remove('open');t.setAttribute('aria-expanded','false');t.textContent='Menu'}
+  t.addEventListener('click',function(){
+    var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o);t.textContent=o?'Close':'Menu';
+  });
   m.addEventListener('click',function(e){if(e.target.closest('a'))close()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){close();t.focus()}});
-
-  // Hero lattices: two grids of points; the second is offset and filtered
-  var ns='http://www.w3.org/2000/svg',l1=document.getElementById('l1'),l2=document.getElementById('l2'),s=0x9e3779b9;
-  function rnd(){s^=s<<13;s^=s>>>17;s^=s<<5;return((s>>>0)%10000)/10000}
-  for(var y=0;y<11;y++)for(var x=0;x<11;x++){
-    var c=document.createElementNS(ns,'circle');
-    c.setAttribute('cx',60+x*40);c.setAttribute('cy',70+y*38);c.setAttribute('r',1.8);l1.appendChild(c);
-    if(rnd()>.55){
-      var d=document.createElementNS(ns,'circle');
-      d.setAttribute('cx',60+x*40);d.setAttribute('cy',70+y*38);d.setAttribute('r',3.2);
-      d.setAttribute('fill','#C5D4A0');d.setAttribute('fill-opacity','.9');l2.appendChild(d);
-    }
-  }
-
-  // Gentle parallax on pointer move
-  var fig=document.getElementById('fig');
-  if(!reduce&&fig){
-    var layers=fig.querySelectorAll('.layer');
-    fig.addEventListener('pointermove',function(e){
-      var r=fig.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
-      layers.forEach(function(L){var d=+L.dataset.d;L.style.transform='translate('+(px*d)+'px,'+(py*d)+'px)'});
-    });
-    fig.addEventListener('pointerleave',function(){layers.forEach(function(L){L.style.transform=''})});
-  }
-
-  // Reveal on scroll
-  var items=document.querySelectorAll('.rv');
-  if(reduce||!('IntersectionObserver' in window)){items.forEach(function(i){i.classList.add('in')})}
-  else{
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
-    items.forEach(function(i){io.observe(i)});
-  }
 })();
 </script>
 </body>
