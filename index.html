@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Parralax | Dataset sourcing and evaluation for machine learning</title>
-<meta name="description" content="Parralax finds, vets and prepares datasets for machine learning teams: dataset sourcing, license review, quality assessment, data preparation and technical consulting.">
+<title>Parralax | Licensed datasets for machine learning</title>
+<meta name="description" content="Parralax supplies licensed datasets for machine learning, with documented provenance, clear license terms and quality reports. Request a dataset or custom sourcing.">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#111210">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111210'/%3E%3Cpath d='M7 9h14l-4 14H3z' fill='none' stroke='%2392958B' stroke-width='1.6'/%3E%3Cpath d='M14 9h14l-4 14H10z' fill='%23C5D4A0'/%3E%3C/svg%3E">
@@ -148,7 +148,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
       <li><a href="#approach">Approach</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a class="mail" href="mailto:michaelzhymanov@gmail.com?subject=Parralax%20inquiry">Email us</a></li>
+      <li><a class="mail" href="mailto:michaelzhymanov@gmail.com?subject=Dataset%20request">Request a dataset</a></li>
     </ul>
   </div>
 </header>
@@ -157,42 +157,36 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
 <div id="top" class="hero">
   <div class="wrap">
     <div>
-      <h1>Dataset sourcing and evaluation for machine learning teams.</h1>
-      <p>Parralax finds candidate datasets for a given task, reads their licenses, and tests them against what your model needs. You get a written assessment of what each dataset can and cannot support.</p>
+      <h1>Licensed datasets for machine learning.</h1>
+      <p>Parralax supplies datasets with documented provenance and clear license terms, for anyone building with data. If we don't have what you need, we source it.</p>
       <div class="actions">
-        <a class="btn" href="#contact">Describe your project</a>
-        <a class="link" href="#services">What we do</a>
+        <a class="btn" href="#contact">Request a dataset</a>
+        <a class="link" href="#services">What we offer</a>
       </div>
     </div>
     <figure>
       <svg viewBox="0 0 640 520" role="img" aria-labelledby="figt">
         <title id="figt">Diagram of parallax: two viewpoints, A and B, looking at three objects at different depths against a distant reference line. Nearer objects shift more between the two views.</title>
-        <!-- distant reference with ticks -->
         <line class="f-line" x1="60" y1="40" x2="600" y2="40"/>
         <line x1="60" y1="44" x2="600" y2="44" stroke="#92958B" stroke-opacity=".5" stroke-width="7" stroke-dasharray="1 19"/>
         <text class="f-txt" x="60" y="22">Distant reference</text>
-        <!-- sight lines from A -->
         <line class="f-line" x1="250" y1="480" x2="185" y2="40"/>
         <line class="f-line" x1="250" y1="480" x2="338" y2="40"/>
         <line class="f-line" x1="250" y1="480" x2="543" y2="40"/>
-        <!-- sight lines from B -->
         <line class="f-lineb" x1="390" y1="480" x2="144" y2="40"/>
         <line class="f-lineb" x1="390" y1="480" x2="232" y2="40"/>
         <line class="f-lineb" x1="390" y1="480" x2="273" y2="40"/>
-        <!-- projections -->
         <g fill="#92958B"><circle cx="185" cy="40" r="2.5"/><circle cx="338" cy="40" r="2.5"/><circle cx="543" cy="40" r="2.5"/></g>
         <g fill="#C5D4A0"><circle cx="144" cy="40" r="2.5"/><circle cx="232" cy="40" r="2.5"/><circle cx="273" cy="40" r="2.5"/></g>
-        <!-- objects -->
         <g fill="#111210" stroke="#E9EAE4" stroke-width="1.2"><circle cx="200" cy="140" r="5"/><circle cx="300" cy="230" r="5"/><circle cx="350" cy="330" r="5"/></g>
         <text class="f-txt" x="212" y="136">Dataset</text>
-        <!-- baseline -->
         <line class="f-line" x1="250" y1="480" x2="390" y2="480"/>
         <line class="f-line" x1="250" y1="472" x2="250" y2="488"/><line class="f-line" x1="390" y1="472" x2="390" y2="488"/>
         <text class="f-txt" x="320" y="500" text-anchor="middle">Baseline</text>
-        <text class="f-txt" x="250" y="470" text-anchor="end" dx="-10">A: the requirement</text>
+        <text class="f-txt" x="250" y="470" text-anchor="end" dx="-10">A: your use</text>
         <text class="f-txt" x="390" y="470" dx="10" style="fill:#C5D4A0">B: the source</text>
       </svg>
-      <figcaption><b>Fig. 1.</b> Seen from the task, a dataset can look suitable. Seen from where the data was collected, it can look different. Our work is measuring that difference.</figcaption>
+      <figcaption><b>Fig. 1.</b> A dataset looks different depending on where it was collected and what you plan to do with it. Every listing documents both.</figcaption>
     </figure>
   </div>
 </div>
@@ -201,13 +195,13 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
   <div class="wrap">
     <h2 id="h-services">Services</h2>
     <div>
-      <p class="lede">We find, vet and prepare the data a model is trained and tested on.</p>
+      <p class="lede">Datasets we have the right to license, and help finding the ones we don't have yet.</p>
       <div class="svc">
-        <div class="row"><h3>Dataset sourcing</h3><p>Given a task and its constraints, we search public, academic and commercial sources and return candidates with notes on size, modality, labeling method and known issues.</p></div>
-        <div class="row"><h3>Licensing and acquisition support</h3><p>We read the terms attached to each dataset and summarize restrictions on commercial use, redistribution and derived models. We can also help draft questions for data providers. We are not lawyers, so the summary is meant for you or your counsel to review.</p></div>
-        <div class="row"><h3>Dataset quality assessment</h3><p>We sample and test for duplicates, label errors, class balance, overlap between training and test splits, and how closely the data matches your deployment conditions. You receive a written report with examples.</p></div>
-        <div class="row"><h3>Data preparation</h3><p>Cleaning, deduplication, format conversion and split design, delivered as documented Python scripts you can rerun. The output loads directly into a PyTorch pipeline.</p></div>
-        <div class="row"><h3>Technical consulting</h3><p>Advice on baselines, evaluation design and model choice for computer vision and transformer-based work, including when collecting different data is a better use of time than changing the model.</p></div>
+        <div class="row"><h3>Licensed datasets</h3><p>Datasets offered under a stated license. Each listing says where the data came from, what you may do with it, and what it contains.</p></div>
+        <div class="row"><h3>Custom sourcing</h3><p>If the data you need isn't listed, describe the task and we search for it and, where possible, arrange a license on your behalf.</p></div>
+        <div class="row"><h3>License documentation</h3><p>Terms written in plain language next to the full license text, covering commercial use, redistribution and derived models. This is a summary for your reference and is not legal advice.</p></div>
+        <div class="row"><h3>Quality reports</h3><p>Duplicates, label errors, class balance, split overlap and coverage are checked and reported before a dataset is offered, with examples.</p></div>
+        <div class="row"><h3>Preparation and delivery</h3><p>Datasets delivered in the format you need, with documented loading scripts for Python and PyTorch.</p></div>
       </div>
     </div>
   </div>
@@ -217,24 +211,24 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
   <div class="wrap">
     <h2 id="h-approach">Approach</h2>
     <div>
-      <p class="lede">Dataset problems usually surface after training, when they are expensive to trace. We move that work to the start.</p>
+      <p class="lede">A dataset is only worth buying if you know what it is and what you may do with it.</p>
       <ol class="pr">
-        <li><span><b>Requirements first.</b> We write down the task, the input conditions, the labels needed and the metric before looking at any data.</span></li>
-        <li><span><b>Provenance and terms.</b> Each candidate gets a record of where it came from and what its license allows.</span></li>
-        <li><span><b>Look at the data.</b> We read samples by hand and run the checks below. Dataset cards and paper abstracts are claims to verify.</span></li>
-        <li><span><b>State the limits.</b> The report says what was tested, what was not, and where we are unsure.</span></li>
-        <li><span><b>Prefer the simple option.</b> If a cleaned public dataset and a standard baseline are enough, that is the recommendation.</span></li>
+        <li><span><b>Only data we can license.</b> We offer a dataset only when we hold the right to do so. We do not resell material whose terms forbid it.</span></li>
+        <li><span><b>Provenance recorded.</b> Every dataset has a documented source and collection method.</span></li>
+        <li><span><b>Terms in plain language.</b> License terms are stated before purchase, not after.</span></li>
+        <li><span><b>Tested before listing.</b> We read samples by hand and run the checks below.</span></li>
+        <li><span><b>Limits stated.</b> Each listing says what the data does not cover.</span></li>
       </ol>
-      <p class="cap">What we check</p>
+      <p class="cap">Included with every dataset</p>
       <table>
-        <thead><tr><th scope="col">Check</th><th scope="col">What we look at</th><th scope="col">Why it matters</th></tr></thead>
+        <thead><tr><th scope="col">Item</th><th scope="col">What it states</th><th scope="col">Why it matters</th></tr></thead>
         <tbody>
-          <tr><td>Provenance</td><td data-l="Looks at">Source, collection method, date range.</td><td data-l="Why">Determines what the data represents and whether it can be reused.</td></tr>
-          <tr><td>License</td><td data-l="Looks at">Commercial use, redistribution, derived models, attribution.</td><td data-l="Why">Some datasets are licensed for research only.</td></tr>
-          <tr><td>Duplicates</td><td data-l="Looks at">Exact and near-duplicate samples, within and across splits.</td><td data-l="Why">Overlap between train and test sets inflates results.</td></tr>
-          <tr><td>Labels</td><td data-l="Looks at">Manual spot checks, ambiguous classes, annotation method.</td><td data-l="Why">Label noise limits the accuracy a model can reach.</td></tr>
-          <tr><td>Balance and coverage</td><td data-l="Looks at">Class frequencies, rare conditions, missing groups.</td><td data-l="Why">Models do worst on what they rarely see.</td></tr>
-          <tr><td>Distribution match</td><td data-l="Looks at">Comparison with your real input conditions.</td><td data-l="Why">Evaluation only means something if the data resembles deployment.</td></tr>
+          <tr><td>Provenance</td><td data-l="States">Source, collection method, date range.</td><td data-l="Why">Shows what the data represents.</td></tr>
+          <tr><td>License</td><td data-l="States">Permitted uses, redistribution, derived models, attribution.</td><td data-l="Why">Determines what you can build and sell with it.</td></tr>
+          <tr><td>Contents and format</td><td data-l="States">Fields, file formats, size, labels.</td><td data-l="Why">Lets you check fit before you buy.</td></tr>
+          <tr><td>Quality report</td><td data-l="States">Duplicates, label errors, balance, split overlap.</td><td data-l="Why">Overlap and label noise distort results.</td></tr>
+          <tr><td>Limitations</td><td data-l="States">Populations, conditions or cases not covered.</td><td data-l="Why">Models do worst on what they rarely see.</td></tr>
+          <tr><td>Delivery</td><td data-l="States">Files, loading scripts, checksums.</td><td data-l="Why">Makes loading and verification reproducible.</td></tr>
         </tbody>
       </table>
     </div>
@@ -247,8 +241,8 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
     <div class="about">
       <div>
         <p class="lede">Parralax is run by Michael Zhymanov, a machine learning developer.</p>
-        <p>I write and train models in Python and PyTorch, mostly transformer-based models and computer vision. That work showed me how much of a result is decided by the dataset: how it was collected, how it was labeled, and how the splits were made.</p>
-        <p>Parralax applies that to selecting and evaluating data for other people's projects. The company is new, and I do the work myself. If your problem is outside what I can do well, I will say so at the start.</p>
+        <p>I write and train models in Python and PyTorch, mostly transformer-based models and computer vision. That work showed me how much a result depends on the dataset: where it came from, how it was labeled, and what its license allows.</p>
+        <p>Parralax supplies datasets to other people on that basis. The company is new, so listings are added as each dataset is properly licensed and checked. If you are looking for something we don't list yet, ask.</p>
       </div>
       <dl>
         <dt>Languages and tools</dt><dd>Python, PyTorch</dd>
@@ -263,10 +257,10 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
   <div class="wrap">
     <h2 id="h-contact">Contact</h2>
     <div>
-      <p class="lede">Send a short description of what you are building and what data you need.</p>
-      <a class="mailto" href="mailto:michaelzhymanov@gmail.com?subject=Parralax%20inquiry&amp;body=What%20the%20model%20should%20do%3A%0A%0AData%20you%20have%20or%20have%20tried%3A%0A%0ALicensing%20or%20privacy%20constraints%3A%0A%0ATimeline%3A%0A">michaelzhymanov@gmail.com</a>
-      <p><strong>Useful to include:</strong> what the model should do, what data you already have or have tried, any licensing or privacy constraints, and your timeline.</p>
-      <p>Partial answers are fine. If a project is better solved another way, we will tell you.</p>
+      <p class="lede">Tell us what data you need, or what data you can license.</p>
+      <a class="mailto" href="mailto:michaelzhymanov@gmail.com?subject=Dataset%20request&amp;body=Type%20and%20volume%20of%20data%20needed%3A%0A%0ALabels%20or%20annotations%20needed%3A%0A%0AIntended%20use%20(research%20or%20commercial)%3A%0A%0ATimeline%3A%0A%0AOr%2C%20if%20you%20hold%20data%20you%20can%20license%2C%20describe%20it%3A%0A">michaelzhymanov@gmail.com</a>
+      <p><strong>Useful to include:</strong> the type and volume of data, the labels you need, whether your use is research or commercial, and your timeline.</p>
+      <p>Data owners: if you hold a dataset and want to license it through Parralax, write to us as well.</p>
     </div>
   </div>
 </section>
@@ -280,7 +274,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
           <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 9h14l-4 14H3z" fill="none" stroke="#92958B" stroke-width="1.6"/><path d="M14 9h14l-4 14H10z" fill="#C5D4A0"/></svg>
           Parralax
         </a>
-        <p>Dataset sourcing, evaluation and preparation for machine learning.</p>
+        <p>Licensed datasets for machine learning.</p>
       </div>
       <nav aria-label="Footer"><h4>Site</h4>
         <ul><li><a href="#services">Services</a></li><li><a href="#approach">Approach</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
@@ -289,7 +283,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;font-size:14px}
         <ul><li><a href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a></li><li>parralax.dev</li></ul>
       </div>
     </div>
-    <div class="legal"><span>&copy; <span id="yr">2026</span> Parralax</span><span>Nothing on this site is legal advice.</span></div>
+    <div class="legal"><span>&copy; <span id="yr">2026</span> Parralax</span><span>Datasets are offered only where Parralax holds the right to license them. Nothing here is legal advice.</span></div>
   </div>
 </footer>
 
