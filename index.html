@@ -1,527 +1,646 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Parralax: Data for machine learning</title>
-<meta name="description" content="Parralax sources and sells specialized datasets for companies building machine-learning systems.">
-<meta property="og:title" content="Parralax: Data for machine learning">
-<link rel="canonical" href="https://parralax.dev/">
-<style>
-:root{--bg:#111210;--surface:#171815;--ink:#E9EAE4;--muted:#92958B;--accent:#C5D4A0;--line:#303129;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-*{box-sizing:border-box;margin:0}
-html{background:var(--bg);color-scheme:dark;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-::selection{background:var(--accent);color:var(--bg)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-a{color:inherit;text-decoration:none}ul,ol{list-style:none;padding:0}
-.wrap{max-width:1152px;margin:0 auto;padding:0 20px}
-.mono{font-family:var(--mono)}.muted{color:var(--muted)}.accent{color:var(--accent)}.ink{color:var(--ink)}.u{text-decoration:underline}
-.ink9{color:rgba(233,234,228,.9)}.small{font-size:12px;color:var(--muted)}
-.eyebrow{font:12px var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.1}
-h1{font-size:clamp(2.8rem,8vw,4.6rem);max-width:900px;margin-top:20px}
-h2{font-size:clamp(1.8rem,4vw,2.4rem);max-width:720px;margin-top:12px}
-section{border-bottom:1px solid var(--line);scroll-margin-top:56px}
-.pad{padding:64px 20px 72px}.body{margin-top:32px}.lede{margin-top:24px;max-width:640px;color:rgba(233,234,228,.9)}
-.btn{display:inline-block;padding:10px 20px;font-size:14px;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer;font-family:inherit;border-radius:2px}
-.btn:hover{border-color:var(--ink)}.btn.p{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:500}.btn.p:hover{opacity:.9}
-.btn.o{border-color:var(--accent);color:var(--accent)}.btn.o:hover{background:var(--accent);color:var(--bg)}
-.note{border-left:2px solid var(--accent);padding-left:16px;font-size:14px;color:rgba(233,234,228,.8);max-width:560px}.note.err{border-color:#d98b7a}
-.tag{display:inline-block;border:1px solid var(--line);padding:0 8px;font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
-header{position:sticky;top:0;z-index:50;background:rgba(17,18,16,.96);border-bottom:1px solid var(--line)}
-.bar{height:56px;display:flex;align-items:center;justify-content:space-between}
-.logo{font:600 14px var(--mono);letter-spacing:.25em}
-nav.d{display:none;gap:28px;font-size:14px;color:var(--muted)}nav.d a:hover{color:var(--ink)}
-.right{display:flex;gap:12px;align-items:center}.right .btn{padding:6px 14px}.hide-m{display:none}
-.mm{position:relative}.mm summary{list-style:none;font-size:12px}.mm summary::-webkit-details-marker{display:none}
-.mm nav{position:absolute;right:0;top:44px;width:220px;background:var(--bg);border:1px solid var(--line)}.mm nav a{display:block;padding:12px 16px;font-size:14px;border-bottom:1px solid var(--line)}.mm nav a:last-child{border:0}
-@media(min-width:768px){nav.d{display:flex}.hide-m{display:inline-block}.mm{display:none}}
-.hero{padding:56px 0 64px;border-bottom:1px solid var(--line)}.hero .lead{margin-top:24px;max-width:640px;font-size:18px;color:rgba(233,234,228,.9)}
-.cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
-.flow{margin-top:56px;border:1px solid var(--line);display:flex;flex-direction:column}.flow li{display:contents}
-.node{flex:1;padding:16px}.node.hl{background:var(--surface)}.node p:last-child{margin-top:8px;font-size:14px;color:rgba(233,234,228,.8)}
-.arrow{text-align:center;padding:4px;font:14px var(--mono);color:var(--muted);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.arrow .h{display:none}
-@media(min-width:768px){.hero{padding:96px 0 80px}.flow{flex-direction:row}.arrow{display:flex;align-items:center;padding:0 12px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line)}.arrow .v{display:none}.arrow .h{display:inline}}
-/* marketplace */
-.mkt{background:var(--surface)}
-.mhead{display:grid;gap:20px;align-items:end}
-.market{display:grid;gap:32px;margin-top:40px}
-.side{display:grid;gap:20px;align-content:start;font-size:14px}
-.side legend,.side label:not(.rad){font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
-.rad{display:flex;gap:10px;align-items:center;margin-bottom:6px;font-size:14px}
-input[type=radio]{accent-color:var(--accent)}
-input:not([type=radio]),select,textarea{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:9px 12px;font:inherit;border-radius:2px}
-input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-fieldset{border:0;padding:0}
-.btns{display:flex;gap:8px}
-.count{font-size:12px;color:var(--muted);padding-bottom:10px}
-.thead{display:none}
-.listing{border-top:1px solid var(--line)}.listing:last-of-type{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;display:grid;gap:2px 16px;padding:16px 8px}
-summary::-webkit-details-marker{display:none}
-summary:hover,.listing[open] summary{background:var(--bg)}
-.t{font-weight:500;display:block;position:relative;padding-left:22px}
-.t::before{content:"+";position:absolute;left:0;font:400 16px var(--mono);color:var(--accent)}
-.listing[open] .t::before{content:"−"}
-.cat{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:400}
-.c{font-size:13px;color:var(--muted);padding-left:22px}.c::before{content:attr(data-l) ": ";opacity:.6}
-.panel{display:grid;gap:24px;padding:20px 8px 28px;background:var(--bg);border-top:1px solid var(--line);font-size:14px}
-.manifest{font-size:13px;line-height:1.9}.manifest>div{display:grid;grid-template-columns:10rem 1fr;border-bottom:1px dashed var(--line)}
-dl.s{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;margin-top:16px}
-dt{font:11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}dd{margin-top:2px}
-.more{display:inline-block;margin-top:16px;color:var(--accent)}.more:hover{text-decoration:underline}
-@media(min-width:900px){.market{grid-template-columns:220px 1fr}.mhead{grid-template-columns:1fr 1fr}
-.thead,summary{display:grid;grid-template-columns:minmax(0,2.6fr) 1fr 1.2fr 1.5fr 1.3fr;gap:16px;align-items:center}
-.thead{padding:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.c{padding:0}.c::before{content:none}.panel{grid-template-columns:1.2fr 1fr}}
-/* sections */
-.cats{display:grid;border-left:1px solid var(--line);border-top:1px solid var(--line)}
-.cats li{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 16px;font-size:14px}
-.three{display:grid;gap:1px;background:var(--line)}.three li{background:var(--bg);padding:20px 24px 20px 0}.three h3{font-size:18px;font-weight:500;margin:8px 0 4px;letter-spacing:0}
-.cols,.two{display:grid;gap:32px}.lst{margin-top:12px}.lst li{border-bottom:1px solid var(--line);padding:8px 0;font-size:14px}
-.steps{border-top:1px solid var(--line)}.steps li{display:grid;grid-template-columns:3rem 1fr;gap:4px 16px;padding:18px 0;border-bottom:1px solid var(--line)}
-.steps li.hl,.steps li.hl p{color:var(--accent)}.steps p{grid-column:2;font-size:14px;color:var(--muted)}.steps h3{font-size:18px;font-weight:500;letter-spacing:0}
-.reqs{display:grid;grid-template-columns:1fr 1fr;font-size:14px;margin-top:12px}.reqs li{border-bottom:1px solid var(--line);padding:8px 0}
-@media(min-width:640px){.cats{grid-template-columns:1fr 1fr}}
-@media(min-width:768px){.three,.cols{grid-template-columns:repeat(3,1fr)}.two{grid-template-columns:1fr 1fr}.cats{grid-template-columns:repeat(3,1fr)}}
-.page{padding:48px 20px 80px}.page h1{font-size:clamp(2.2rem,6vw,3.4rem);margin-top:8px}.back{font-size:12px;color:var(--muted)}.back:hover{color:var(--ink)}
-.dgrid{margin-top:40px;display:grid;gap:48px}.dgrid section{border:0;margin-bottom:36px}
-.dgrid dl{display:grid;gap:16px 32px;margin-bottom:36px}.dgrid dl div{border-top:1px solid var(--line);padding-top:12px}
-.dgrid h2,aside h2{font:12px var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
-aside{border:1px solid var(--line);background:var(--surface);padding:20px;height:fit-content}aside .btn{display:block;text-align:center;margin-top:20px}
-@media(min-width:768px){.dgrid{grid-template-columns:2fr 1fr}.dgrid dl{grid-template-columns:1fr 1fr}}
-.opts{display:grid;border:1px solid var(--line);margin-top:40px}.opt{padding:24px;border-bottom:1px solid var(--line)}.opt:last-child{border:0}
-.opt h2{font-size:20px;font-weight:500;margin:0;letter-spacing:0}.opt p{font-size:14px;color:var(--muted);margin-top:8px}.opt .btn{margin-top:20px}
-@media(min-width:768px){.opts{grid-template-columns:1fr 1fr}.opt{border-bottom:0;border-right:1px solid var(--line)}.opt:last-child{border-right:0}}
-form#form{margin-top:48px;max-width:576px;display:grid;gap:20px;scroll-margin-top:80px}
-form#form label:not(.rad),form#form legend{font-size:14px;display:block;margin-bottom:6px}
-footer{padding:48px 0;border-top:1px solid var(--line)}.fgrid{display:grid;gap:32px;font-size:14px;color:var(--muted)}.fgrid li{margin-bottom:8px}.fgrid a:hover{color:var(--ink)}
-@media(min-width:768px){.fgrid{grid-template-columns:1fr auto auto;gap:64px}}
-.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:var(--accent);color:var(--bg);padding:4px 12px;z-index:99}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Parralax sells specialized datasets for machine learning. Browse data sourced from private data owners and available through commercial licensing." />
+  <title>Parralax — Data for Machine Learning</title>
+  <style>
+    :root {
+      --bg: #0b0c0e;
+      --panel: #101216;
+      --panel-2: #14171b;
+      --text: #f1f2f3;
+      --muted: #92979f;
+      --line: #292d33;
+      --accent: #d8ff63;
+      --accent-dark: #b9dc4e;
+      --max: 1180px;
+    }
 
-[hidden]{display:none!important}
-</style>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111210'/%3E%3Cpath d='M10 25V7h8a5.5 5.5 0 0 1 0 11h-8' fill='none' stroke='%23C5D4A0' stroke-width='3'/%3E%3C/svg%3E">
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      height: 76px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(11,12,14,.94);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+    }
+
+    .nav-inner {
+      width: min(calc(100% - 40px), var(--max));
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: -.05em;
+      font-size: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      color: #a9adb4;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .nav-cta, .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--text);
+      padding: 10px 15px;
+      font-size: 13px;
+      font-weight: 650;
+      background: var(--text);
+      color: #0b0c0e;
+      transition: .2s ease;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover, .button:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--line);
+    }
+
+    .button.secondary:hover {
+      border-color: #5b616a;
+      background: var(--panel-2);
+    }
+
+    .hero {
+      padding: 112px 0 96px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: 11px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(56px, 8vw, 104px);
+      line-height: .91;
+      letter-spacing: -.07em;
+      margin: 0;
+      max-width: 800px;
+      font-weight: 780;
+    }
+
+    .hero-copy {
+      color: #b0b4ba;
+      font-size: 18px;
+      max-width: 570px;
+      margin: 30px 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .flow {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr 40px 1fr;
+      align-items: center;
+      padding: 24px 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: #aeb2b8;
+    }
+
+    .flow strong { color: white; display: block; margin-top: 4px; }
+    .arrow { text-align: center; color: #5c626a; }
+
+    section { padding: 100px 0; border-bottom: 1px solid var(--line); }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .section-description {
+      max-width: 450px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .datasets {
+      border-top: 1px solid var(--line);
+    }
+
+    .dataset {
+      display: grid;
+      grid-template-columns: 1.5fr .7fr .7fr .8fr auto;
+      gap: 20px;
+      align-items: center;
+      padding: 25px 0;
+      border-bottom: 1px solid var(--line);
+      transition: background .2s ease;
+    }
+
+    .dataset:hover {
+      background: rgba(255,255,255,.025);
+    }
+
+    .dataset-name {
+      font-size: 18px;
+      font-weight: 650;
+    }
+
+    .dataset-type {
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status {
+      font-size: 11px;
+      color: #b7bbc1;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .access {
+      white-space: nowrap;
+      color: white;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .access:hover { color: var(--accent); }
+
+    .note {
+      margin-top: 15px;
+      color: #666b73;
+      font-size: 11px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .split-card {
+      background: var(--bg);
+      padding: 50px;
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .split-card h3 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -.04em;
+    }
+
+    .split-card p {
+      color: var(--muted);
+      max-width: 450px;
+      font-size: 15px;
+    }
+
+    .number {
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .step {
+      padding: 28px 24px;
+      min-height: 210px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step h3 {
+      margin: 40px 0 10px;
+      font-size: 18px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 100px;
+    }
+
+    .contact-copy p {
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 14px;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #666d76;
+    }
+
+    textarea { min-height: 150px; resize: vertical; }
+
+    select option { background: #101216; }
+
+    footer {
+      padding: 35px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      color: #747981;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .nav-links { display: none; }
+      .hero-grid, .contact { grid-template-columns: 1fr; gap: 45px; }
+      .dataset {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .dataset .access { grid-column: 1 / -1; }
+      .process { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .container, .nav-inner { width: min(calc(100% - 28px), var(--max)); }
+      .hero { padding: 75px 0; }
+      section { padding: 70px 0; }
+      .hero-copy { font-size: 16px; }
+      .flow-row { grid-template-columns: 1fr; gap: 12px; }
+      .arrow { display: none; }
+      .dataset { grid-template-columns: 1fr; padding: 22px 0; }
+      .dataset .access { grid-column: auto; }
+      .split { grid-template-columns: 1fr; }
+      .split-card { padding: 30px; }
+      .process { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-description { margin-top: 20px; }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
- <div class="wrap bar">
-  <a class="logo" href="#/">PARRALAX</a>
-  <nav class="d" aria-label="Main">
-   <a href="#datasets">Datasets</a><a href="#data-owners">Data Owners</a><a href="#how-it-works">How It Works</a><a href="#about">About</a><a href="#/contact">Contact</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="#">PARRALAX</a>
+      <div class="nav-links">
+        <a href="#datasets">Datasets</a>
+        <a href="#owners">Data Owners</a>
+        <a href="#process">How It Works</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="nav-cta" href="#datasets">Browse Data</a>
+    </div>
   </nav>
-  <div class="right">
-   <a class="btn o hide-m" href="#datasets">Browse Data</a>
-   <details class="mm"><summary class="btn mono">MENU</summary>
-    <nav aria-label="Mobile">
-     <a href="#datasets">Datasets</a><a href="#data-owners">Data Owners</a><a href="#how-it-works">How It Works</a><a href="#about">About</a><a href="#/contact">Contact</a><a href="#datasets">Browse Data</a>
-    </nav>
-   </details>
-  </div>
- </div>
-</header>
-<main id="main">
-<div data-view="home">
-<section class="hero"><div class="wrap">
- <p class="eyebrow accent">Data for machine learning</p>
- <h1>Models need data. We sell it.</h1>
- <p class="lead">Parralax sources and sells specialized datasets for companies building machine-learning systems.</p>
- <p class="muted" style="margin-top:8px">Find the data your model needs.</p>
- <div class="cta"><a class="btn p" href="#datasets">Browse Data</a><a class="btn" href="#/contact?intent=license">License Your Data</a></div>
- <ol class="flow" aria-label="How data moves through Parralax">
-  
-  <li><div class="node"><p class="eyebrow">01 / Data owner</p><p>Private company holding a dataset</p></div><span class="arrow" aria-hidden="true"><span class="v">↓</span><span class="h">→</span></span></li>
-  
-  <li><div class="node"><p class="eyebrow">02 / Data</p><p>Licensed, prepared, documented</p></div><span class="arrow" aria-hidden="true"><span class="v">↓</span><span class="h">→</span></span></li>
-  
-  <li><div class="node hl"><p class="eyebrow accent">03 / Parralax</p><p>Lists the dataset and sells access</p></div><span class="arrow" aria-hidden="true"><span class="v">↓</span><span class="h">→</span></span></li>
-  
-  <li><div class="node"><p class="eyebrow">04 / ML company</p><p>Buys access under defined terms</p></div></li>
-  
- </ol>
-</div></section>
 
-<section id="datasets" class="mkt"><div class="wrap pad">
- <div class="mhead">
-  <div><p class="eyebrow">Marketplace</p><h2>Browse Data</h2>
-   <p class="muted" style="margin-top:12px">Specialized datasets for machine-learning development.</p></div>
-  <p class="note">These listings are examples of the dataset types Parralax intends to offer. None is current inventory.</p>
- </div>
- <div class="market">
-  <form class="side" id="filters" role="search" aria-label="Filter datasets">
-   <div><label for="q">Search</label><input id="q" name="q" type="search" value="" placeholder="e.g. detection, text"></div>
-   <fieldset><legend>Category</legend><label class="rad"><input type="radio" name="category" value="All" checked> All</label><label class="rad"><input type="radio" name="category" value="Computer Vision" > Computer Vision</label><label class="rad"><input type="radio" name="category" value="NLP" > NLP</label></fieldset>
-   <fieldset><legend>Modality</legend><label class="rad"><input type="radio" name="modality" value="All" checked> All</label><label class="rad"><input type="radio" name="modality" value="Image" > Image</label><label class="rad"><input type="radio" name="modality" value="Text" > Text</label></fieldset>
-   <div><label for="sort">Sort by</label><select id="sort" name="sort"><option value="title" selected>Title</option><option value="category" >Category</option></select></div>
-   <div class="btns"><button class="btn p" type="submit">Apply</button><button class="btn" type="reset">Reset</button></div>
-  </form>
-  <div>
-   <p class="count mono" id="count">4 of 4 listings</p>
-   <div class="thead mono" aria-hidden="true"><span>Dataset</span><span>Modality</span><span>Format</span><span>Size</span><span>License</span></div>
-   <div id="rows">
-   <details class="listing" data-cat="Computer Vision" data-mod="Image" data-title="Geospatial Imagery" data-text="geospatial imagery computer vision satellite / aerial images segmentation / detection geotiff">
-    <summary>
-     <span class="t"><span class="cat mono">Computer Vision</span>Geospatial Imagery <span class="tag">Coming Soon</span></span>
-     <span class="c" data-l="Modality">Image</span><span class="c" data-l="Format">GeoTIFF</span><span class="c" data-l="Size">To be determined</span><span class="c" data-l="License">Commercial access</span>
-    </summary>
-    <div class="panel">
-     <div>
-      <p>A category Parralax intends to support. No dataset is currently available.</p>
-      <dl class="s"><div><dt>Task</dt><dd>Segmentation / detection</dd></div><div><dt>Type</dt><dd>Satellite / aerial images</dd></div><div><dt>Labels</dt><dd>To be determined.</dd></div><div><dt>Access</dt><dd>Not yet available</dd></div></dl>
-      <a class="more" href="#/dataset/geospatial-imagery">Open listing →</a>
-     </div>
-     <div class="manifest mono" role="table" aria-label="Illustrative contents">
-      <p class="eyebrow" style="margin-bottom:8px">Contents (illustrative)</p>
-      <div role="row"><span role="cell" class="ink">tiles/</span><span role="cell" class="muted">GeoTIFF tiles</span></div><div role="row"><span role="cell" class="ink">masks/</span><span role="cell" class="muted">segmentation masks</span></div><div role="row"><span role="cell" class="ink">LICENSE</span><span role="cell" class="muted">applicable agreement</span></div>
-     </div>
+  <main>
+    <header class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Parralax / Data Marketplace</div>
+          <h1>Data for machine learning.</h1>
+          <p class="hero-copy">
+            Parralax sources and sells specialized datasets for companies building
+            machine-learning systems.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#datasets">Browse Data</a>
+            <a class="button secondary" href="#owners">Sell Your Data</a>
+          </div>
+        </div>
+
+        <div class="flow">
+          <div class="flow-row">
+            <div>01<strong>DATA OWNER</strong></div>
+            <div class="arrow">→</div>
+            <div>02<strong>DATASET</strong></div>
+            <div class="arrow">→</div>
+            <div>03<strong>PARRALAX</strong></div>
+          </div>
+          <div class="flow-row">
+            <div>04<strong>LICENSE</strong></div>
+            <div class="arrow">→</div>
+            <div>05<strong>ML COMPANY</strong></div>
+            <div></div><div></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="datasets">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-label">01 / Marketplace</div>
+            <h2>Browse data.</h2>
+          </div>
+          <div class="section-description">
+            Specialized datasets for machine-learning development. Listings below
+            are examples of how Parralax data can be presented.
+          </div>
+        </div>
+
+        <div class="datasets">
+          <article class="dataset">
+            <div>
+              <div class="dataset-type">Computer Vision</div>
+              <div class="dataset-name">Industrial Equipment Images</div>
+            </div>
+            <div class="meta">Images</div>
+            <div class="meta">Object Detection</div>
+            <div class="status">COMMERCIAL ACCESS</div>
+            <a class="access" href="#contact">Request →</a>
+          </article>
+
+          <article class="dataset">
+            <div>
+              <div class="dataset-type">Computer Vision</div>
+              <div class="dataset-name">Retail Product Dataset</div>
+            </div>
+            <div class="meta">Images + Metadata</div>
+            <div class="meta">Classification</div>
+            <div class="status">COMMERCIAL ACCESS</div>
+            <a class="access" href="#contact">Request →</a>
+          </article>
+
+          <article class="dataset">
+            <div>
+              <div class="dataset-type">NLP</div>
+              <div class="dataset-name">Specialized Text Corpus</div>
+            </div>
+            <div class="meta">Text</div>
+            <div class="meta">Language Models</div>
+            <div class="status">COMMERCIAL ACCESS</div>
+            <a class="access" href="#contact">Request →</a>
+          </article>
+
+          <article class="dataset">
+            <div>
+              <div class="dataset-type">Geospatial</div>
+              <div class="dataset-name">Aerial Imagery Collection</div>
+            </div>
+            <div class="meta">Images</div>
+            <div class="meta">Segmentation</div>
+            <div class="status">COMMERCIAL ACCESS</div>
+            <a class="access" href="#contact">Request →</a>
+          </article>
+        </div>
+
+        <div class="note">Example inventory — replace with actual datasets as they become available.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-label">02 / Product</div>
+            <h2>Data, not consulting.</h2>
+          </div>
+          <div class="section-description">
+            The product is access to specialized data. Licensing defines how that
+            data can be used and commercialized.
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="split-card">
+            <div class="number">FOR ML COMPANIES / 01</div>
+            <div>
+              <h3>Find data.</h3>
+              <p>
+                Buy access to datasets relevant to computer vision, NLP, research,
+                evaluation, and other machine-learning applications.
+              </p>
+              <a class="button secondary" href="#contact">Find Data →</a>
+            </div>
+          </div>
+
+          <div class="split-card" id="owners">
+            <div class="number">FOR DATA OWNERS / 02</div>
+            <div>
+              <h3>Sell data.</h3>
+              <p>
+                If your company has valuable data, Parralax can work with you to
+                make it available for commercial licensing.
+              </p>
+              <a class="button secondary" href="#contact">Sell Your Data →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-label">03 / Process</div>
+            <h2>From data to market.</h2>
+          </div>
+          <div class="section-description">
+            Parralax sits between data owners with valuable information and
+            machine-learning companies looking to buy it.
+          </div>
+        </div>
+
+        <div class="process">
+          <div class="step">
+            <div class="number">01</div>
+            <h3>Source</h3>
+            <p>Find valuable datasets held by private companies and data owners.</p>
+          </div>
+          <div class="step">
+            <div class="number">02</div>
+            <h3>License</h3>
+            <p>Establish the appropriate rights and permitted uses.</p>
+          </div>
+          <div class="step">
+            <div class="number">03</div>
+            <h3>Prepare</h3>
+            <p>Organize the data and documentation for potential buyers.</p>
+          </div>
+          <div class="step">
+            <div class="number">04</div>
+            <h3>List</h3>
+            <p>Present the dataset with useful technical and licensing information.</p>
+          </div>
+          <div class="step">
+            <div class="number">05</div>
+            <h3>Sell</h3>
+            <p>ML companies obtain access under the applicable agreement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-label">04 / About</div>
+        <h2>The data layer<br />between companies.</h2>
+        <p class="hero-copy">
+          Machine-learning companies need specialized data. Private companies often
+          already have it. Parralax connects those two sides by sourcing data,
+          licensing the appropriate rights, and selling access to the resulting
+          datasets.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact">
+        <div class="contact-copy">
+          <div class="section-label">05 / Contact</div>
+          <h2>Find data.<br />Sell data.</h2>
+          <p>
+            Tell Parralax what you need, or tell us what data you have.
+          </p>
+          <p>
+            <a href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a>
+          </p>
+        </div>
+
+        <form action="mailto:michaelzhymanov@gmail.com" method="post" enctype="text/plain">
+          <input name="name" type="text" placeholder="Name" required />
+          <input name="company" type="text" placeholder="Company" />
+          <input name="email" type="email" placeholder="Email" required />
+          <select name="interest">
+            <option value="">I'm interested in...</option>
+            <option>Buying data</option>
+            <option>Selling data</option>
+            <option>Both</option>
+          </select>
+          <textarea name="message" placeholder="Tell us what you're looking for or what data you have."></textarea>
+          <button class="button" type="submit">Start a conversation →</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong>PARRALAX</strong><br />
+        Data for machine learning.
+      </div>
+      <div class="footer-links">
+        <a href="#datasets">Datasets</a>
+        <a href="#owners">Data Owners</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>parralax.dev</div>
     </div>
-   </details>
-   
-   <details class="listing" data-cat="Computer Vision" data-mod="Image" data-title="Industrial Equipment Images" data-text="industrial equipment images computer vision images object detection jpeg / png">
-    <summary>
-     <span class="t"><span class="cat mono">Computer Vision</span>Industrial Equipment Images <span class="tag">Example Dataset</span></span>
-     <span class="c" data-l="Modality">Image</span><span class="c" data-l="Format">JPEG / PNG</span><span class="c" data-l="Size">~50,000 images (illustrative)</span><span class="c" data-l="License">Commercial access</span>
-    </summary>
-    <div class="panel">
-     <div>
-      <p>Example listing: images of industrial equipment captured in operating environments, for detection and inspection models.</p>
-      <dl class="s"><div><dt>Task</dt><dd>Object detection</dd></div><div><dt>Type</dt><dd>Images</dd></div><div><dt>Labels</dt><dd>Illustrative: bounding boxes and equipment class labels, with capture metadata.</dd></div><div><dt>Access</dt><dd>By request</dd></div></dl>
-      <a class="more" href="#/dataset/industrial-equipment-images">Open listing →</a>
-     </div>
-     <div class="manifest mono" role="table" aria-label="Illustrative contents">
-      <p class="eyebrow" style="margin-bottom:8px">Contents (illustrative)</p>
-      <div role="row"><span role="cell" class="ink">images/</span><span role="cell" class="muted">JPEG / PNG files</span></div><div role="row"><span role="cell" class="ink">annotations.json</span><span role="cell" class="muted">boxes + class labels</span></div><div role="row"><span role="cell" class="ink">metadata.csv</span><span role="cell" class="muted">capture metadata</span></div><div role="row"><span role="cell" class="ink">LICENSE</span><span role="cell" class="muted">applicable agreement</span></div>
-     </div>
-    </div>
-   </details>
-   
-   <details class="listing" data-cat="Computer Vision" data-mod="Image" data-title="Retail Product Dataset" data-text="retail product dataset computer vision images + metadata classification / detection jpeg + json">
-    <summary>
-     <span class="t"><span class="cat mono">Computer Vision</span>Retail Product Dataset <span class="tag">Example Dataset</span></span>
-     <span class="c" data-l="Modality">Image</span><span class="c" data-l="Format">JPEG + JSON</span><span class="c" data-l="Size">~200,000 records (illustrative)</span><span class="c" data-l="License">Commercial access</span>
-    </summary>
-    <div class="panel">
-     <div>
-      <p>Example listing: retail product images paired with structured product metadata.</p>
-      <dl class="s"><div><dt>Task</dt><dd>Classification / detection</dd></div><div><dt>Type</dt><dd>Images + metadata</dd></div><div><dt>Labels</dt><dd>Illustrative: product category, attributes, and bounding boxes.</dd></div><div><dt>Access</dt><dd>By request</dd></div></dl>
-      <a class="more" href="#/dataset/retail-product-dataset">Open listing →</a>
-     </div>
-     <div class="manifest mono" role="table" aria-label="Illustrative contents">
-      <p class="eyebrow" style="margin-bottom:8px">Contents (illustrative)</p>
-      <div role="row"><span role="cell" class="ink">images/</span><span role="cell" class="muted">JPEG files</span></div><div role="row"><span role="cell" class="ink">products.jsonl</span><span role="cell" class="muted">category + attributes</span></div><div role="row"><span role="cell" class="ink">boxes.json</span><span role="cell" class="muted">bounding boxes</span></div><div role="row"><span role="cell" class="ink">LICENSE</span><span role="cell" class="muted">applicable agreement</span></div>
-     </div>
-    </div>
-   </details>
-   
-   <details class="listing" data-cat="NLP" data-mod="Text" data-title="Specialized Text Corpus" data-text="specialized text corpus nlp text language model training jsonl">
-    <summary>
-     <span class="t"><span class="cat mono">NLP</span>Specialized Text Corpus <span class="tag">Example Dataset</span></span>
-     <span class="c" data-l="Modality">Text</span><span class="c" data-l="Format">JSONL</span><span class="c" data-l="Size">~5 GB (illustrative)</span><span class="c" data-l="License">Commercial access</span>
-    </summary>
-    <div class="panel">
-     <div>
-      <p>Example listing: a domain-specific text corpus for language model training and evaluation.</p>
-      <dl class="s"><div><dt>Task</dt><dd>Language model training</dd></div><div><dt>Type</dt><dd>Text</dd></div><div><dt>Labels</dt><dd>Illustrative: document-level metadata and domain tags.</dd></div><div><dt>Access</dt><dd>By request</dd></div></dl>
-      <a class="more" href="#/dataset/specialized-text-corpus">Open listing →</a>
-     </div>
-     <div class="manifest mono" role="table" aria-label="Illustrative contents">
-      <p class="eyebrow" style="margin-bottom:8px">Contents (illustrative)</p>
-      <div role="row"><span role="cell" class="ink">shards/*.jsonl</span><span role="cell" class="muted">documents, one per line</span></div><div role="row"><span role="cell" class="ink">metadata.json</span><span role="cell" class="muted">domain tags</span></div><div role="row"><span role="cell" class="ink">splits.json</span><span role="cell" class="muted">train / eval split</span></div><div role="row"><span role="cell" class="ink">LICENSE</span><span role="cell" class="muted">applicable agreement</span></div>
-     </div>
-    </div>
-   </details>
-   </div><p id="none" class="muted" style="padding:24px 0" hidden>No listings match these filters.</p>
-   <p class="small" style="margin-top:20px">Datasets are offered subject to their applicable licensing terms. Available uses vary by dataset.</p>
-  </div>
- </div>
-</div></section>
-
-<section><div class="wrap pad">
- <p class="eyebrow">What we sell</p><h2>Data, not consulting.</h2>
- <p class="lede">Parralax provides access to datasets that ML companies can use for training, evaluation, research, and development.</p>
- <ul class="cats body"><li>Computer Vision Data</li><li>NLP Data</li><li>Image Data</li><li>Video Data</li><li>Text Data</li><li>Audio Data</li><li>Geospatial Data</li><li>Industry-Specific Data</li><li>Custom / Specialized Data</li></ul>
- <p class="small" style="margin-top:16px">These are the dataset types the marketplace is intended to support. Not every category is currently available.</p>
-</div></section>
-
-<section><div class="wrap pad">
- <p class="eyebrow">Why Parralax</p><h2>Find data without finding it yourself.</h2>
- <p class="muted lede">ML teams often need specialized data that is difficult to locate or obtain directly. Parralax acts as the data supplier.</p>
- <ol class="three body">
-  <li><p class="mono accent" style="font-size:12px">01</p><h3>Discover</h3><p class="muted" style="font-size:14px">Find datasets relevant to specific ML problems.</p></li>
-  <li><p class="mono accent" style="font-size:12px">02</p><h3>Access</h3><p class="muted" style="font-size:14px">Obtain datasets through defined commercial terms.</p></li>
-  <li><p class="mono accent" style="font-size:12px">03</p><h3>Build</h3><p class="muted" style="font-size:14px">Use the data for approved machine-learning development and research.</p></li></ol>
-</div></section>
-
-<section id="how-it-works"><div class="wrap pad">
- <p class="eyebrow">How it works</p><h2>Where the data comes from.</h2>
- <p class="lede">Private companies and data owners may have valuable datasets that they are willing to commercialize. Parralax licenses those datasets from their owners and sells access to buyers.</p>
- <ol class="steps body">
-  <li><span class="mono">01</span><h3>Source</h3><p>Find valuable datasets.</p></li>
-  <li><span class="mono">02</span><h3>License</h3><p>Obtain a license from the data owner covering the permitted uses.</p></li>
-  <li><span class="mono">03</span><h3>Prepare</h3><p>Organize the data and documentation.</p></li>
-  <li><span class="mono">04</span><h3>List</h3><p>Make the dataset available through Parralax.</p></li>
-  <li class=hl><span class="mono">05</span><h3>Sell</h3><p>ML companies purchase or access the dataset under the applicable terms.</p></li></ol>
- <p class="small" style="margin-top:24px">The end product is data access. Datasets are offered subject to their applicable licensing terms.</p>
-</div></section>
-
-<section><div class="wrap pad">
- <p class="eyebrow">Use cases</p><h2>Built for machine learning.</h2>
- <p class="muted" style="margin:16px 0 32px;font-size:14px">Potential applications. These are not claims about current inventory.</p>
- <div class="cols">
-  <div><h3 class="eyebrow">Computer vision</h3><ul class="lst"><li>Object detection</li><li>Image classification</li><li>Segmentation</li></ul></div>
-  <div><h3 class="eyebrow">Language</h3><ul class="lst"><li>NLP</li><li>Language models</li><li>Classification</li></ul></div>
-  <div><h3 class="eyebrow">Research</h3><ul class="lst"><li>Research</li><li>Evaluation</li></ul></div></div>
-</div></section>
-
-<section id="data-owners"><div class="wrap pad">
- <p class="eyebrow">For data owners</p><h2>License your data to Parralax.</h2>
- <div class="two body">
-  <div>
-   <p class="ink9">Parralax licenses datasets from companies and organizations, then sells access to ML companies. If you hold data that may have commercial value, you can license it to Parralax.</p>
-   <p class="muted" style="margin-top:16px;font-size:14px">Unused or underused datasets can potentially become a commercial asset. Ownership, permitted uses, and compensation are determined by the applicable agreement.</p>
-   <a class="btn p" style="margin-top:24px" href="#/contact?intent=license">License Your Data</a>
-  </div>
-  <ol class="steps" style="border-top:1px solid var(--line)">
-   <li><span class="mono">01</span><h3>Describe</h3><p>Tell us what the dataset contains and where it came from.</p></li>
-   <li><span class="mono">02</span><h3>Evaluate</h3><p>We review the data and your rights to it.</p></li>
-   <li><span class="mono">03</span><h3>License</h3><p>Agree the license terms in writing.</p></li>
-   <li><span class="mono">04</span><h3>List</h3><p>Parralax prepares and lists the dataset.</p></li></ol>
- </div>
-</div></section>
-
-<section><div class="wrap pad">
- <p class="eyebrow">For ML companies</p><h2>Looking for data?</h2>
- <div class="two body">
-  <div><p class="ink9">Tell us what you're looking for and we'll help you find relevant datasets available through Parralax.</p>
-   <a class="btn p" style="margin-top:24px" href="#/contact?intent=buy">Find Data</a></div>
-  <div><p class="eyebrow">Useful to include</p><ul class="reqs"><li>Dataset type</li><li>Industry</li><li>Modality</li><li>Approximate size</li><li>ML application</li><li>Required license</li><li>Other requirements</li></ul></div>
- </div>
-</div></section>
-
-<section id="about"><div class="wrap pad">
- <p class="eyebrow">About</p><h2>The data marketplace for ML.</h2>
- <div class="body" style="max-width:640px"><p class="ink9">Machine-learning companies need large amounts of specialized data. Many private companies already hold valuable data that is difficult for them to commercialize.</p>
- <p style="margin-top:16px;font-weight:500">Data owners have data. ML companies need data. Parralax connects them.</p></div>
-</div></section>
-</div>
-<div data-view="d:industrial-equipment-images" hidden>
-
-<div class="wrap page">
- <a class="back mono" href="#datasets">← All datasets</a>
- <p class="eyebrow" style="margin-top:32px">Computer Vision</p>
- <h1>Industrial Equipment Images</h1>
- <p style="margin-top:16px"><span class="tag">Example Dataset</span></p>
- <div class="dgrid">
-  <div>
-   <section><h2>Overview</h2><p class="ink9" style="max-width:640px">Example listing: images of industrial equipment captured in operating environments, for detection and inspection models.</p></section>
-   <dl><div><dt>Data type</dt><dd style="font-size:14px">Images</dd></div><div><dt>Format</dt><dd style="font-size:14px">JPEG / PNG</dd></div><div><dt>Approx. size</dt><dd style="font-size:14px">~50,000 images (illustrative)</dd></div><div><dt>Modality</dt><dd style="font-size:14px">Image</dd></div><div><dt>Labels</dt><dd style="font-size:14px">Illustrative: bounding boxes and equipment class labels, with capture metadata.</dd></div><div><dt>License</dt><dd style="font-size:14px">Commercial access</dd></div></dl>
-   <section><h2>Contents (illustrative)</h2><div class="manifest mono"><div><span class="ink">images/</span><span class="muted">JPEG / PNG files</span></div><div><span class="ink">annotations.json</span><span class="muted">boxes + class labels</span></div><div><span class="ink">metadata.csv</span><span class="muted">capture metadata</span></div><div><span class="ink">LICENSE</span><span class="muted">applicable agreement</span></div></div></section>
-   <section><h2>Potential ML applications</h2><ul class="lst"><li>Equipment detection</li><li>Visual inspection</li><li>Asset recognition</li></ul></section>
-   <div class="two">
-    <section><h2>Permitted uses (illustrative)</h2><ul class="lst"><li>Model training and evaluation</li><li>Internal research and development</li></ul></section>
-    <section><h2>Restrictions (illustrative)</h2><ul class="lst"><li>Redistribution or resale of the raw data</li><li>Uses outside the applicable agreement</li><li>Final terms vary by dataset and are set in the agreement</li></ul></section>
-   </div>
-   <section><h2>Data source</h2><p style="font-size:14px;max-width:640px">Example only. A real listing would describe the data owner&#39;s relationship to the data and the rights obtained.</p></section>
-  </div>
-  <aside>
-   <h2>Access options</h2>
-   <p style="font-size:14px">Access is arranged by request under the applicable agreement.</p>
-   <p class="small" style="margin-top:8px">Online purchasing is not available yet. This page is structured so a purchase flow can be added later.</p>
-   <a class="btn p" href="#/contact?intent=buy&amp;dataset=industrial-equipment-images">Request Access</a>
-   <p class="small" style="margin-top:16px">Dataset access is subject to the applicable agreement.</p>
-  </aside>
- </div>
-</div>
-</div>
-<div data-view="d:retail-product-dataset" hidden>
-
-<div class="wrap page">
- <a class="back mono" href="#datasets">← All datasets</a>
- <p class="eyebrow" style="margin-top:32px">Computer Vision</p>
- <h1>Retail Product Dataset</h1>
- <p style="margin-top:16px"><span class="tag">Example Dataset</span></p>
- <div class="dgrid">
-  <div>
-   <section><h2>Overview</h2><p class="ink9" style="max-width:640px">Example listing: retail product images paired with structured product metadata.</p></section>
-   <dl><div><dt>Data type</dt><dd style="font-size:14px">Images + metadata</dd></div><div><dt>Format</dt><dd style="font-size:14px">JPEG + JSON</dd></div><div><dt>Approx. size</dt><dd style="font-size:14px">~200,000 records (illustrative)</dd></div><div><dt>Modality</dt><dd style="font-size:14px">Image</dd></div><div><dt>Labels</dt><dd style="font-size:14px">Illustrative: product category, attributes, and bounding boxes.</dd></div><div><dt>License</dt><dd style="font-size:14px">Commercial access</dd></div></dl>
-   <section><h2>Contents (illustrative)</h2><div class="manifest mono"><div><span class="ink">images/</span><span class="muted">JPEG files</span></div><div><span class="ink">products.jsonl</span><span class="muted">category + attributes</span></div><div><span class="ink">boxes.json</span><span class="muted">bounding boxes</span></div><div><span class="ink">LICENSE</span><span class="muted">applicable agreement</span></div></div></section>
-   <section><h2>Potential ML applications</h2><ul class="lst"><li>Product classification</li><li>Shelf and product detection</li><li>Catalog matching</li></ul></section>
-   <div class="two">
-    <section><h2>Permitted uses (illustrative)</h2><ul class="lst"><li>Model training and evaluation</li><li>Internal research and development</li></ul></section>
-    <section><h2>Restrictions (illustrative)</h2><ul class="lst"><li>Redistribution or resale of the raw data</li><li>Uses outside the applicable agreement</li><li>Final terms vary by dataset and are set in the agreement</li></ul></section>
-   </div>
-   <section><h2>Data source</h2><p style="font-size:14px;max-width:640px">Example only. A real listing would document where the data came from and under what rights.</p></section>
-  </div>
-  <aside>
-   <h2>Access options</h2>
-   <p style="font-size:14px">Access is arranged by request under the applicable agreement.</p>
-   <p class="small" style="margin-top:8px">Online purchasing is not available yet. This page is structured so a purchase flow can be added later.</p>
-   <a class="btn p" href="#/contact?intent=buy&amp;dataset=retail-product-dataset">Request Access</a>
-   <p class="small" style="margin-top:16px">Dataset access is subject to the applicable agreement.</p>
-  </aside>
- </div>
-</div>
-</div>
-<div data-view="d:specialized-text-corpus" hidden>
-
-<div class="wrap page">
- <a class="back mono" href="#datasets">← All datasets</a>
- <p class="eyebrow" style="margin-top:32px">NLP</p>
- <h1>Specialized Text Corpus</h1>
- <p style="margin-top:16px"><span class="tag">Example Dataset</span></p>
- <div class="dgrid">
-  <div>
-   <section><h2>Overview</h2><p class="ink9" style="max-width:640px">Example listing: a domain-specific text corpus for language model training and evaluation.</p></section>
-   <dl><div><dt>Data type</dt><dd style="font-size:14px">Text</dd></div><div><dt>Format</dt><dd style="font-size:14px">JSONL</dd></div><div><dt>Approx. size</dt><dd style="font-size:14px">~5 GB (illustrative)</dd></div><div><dt>Modality</dt><dd style="font-size:14px">Text</dd></div><div><dt>Labels</dt><dd style="font-size:14px">Illustrative: document-level metadata and domain tags.</dd></div><div><dt>License</dt><dd style="font-size:14px">Commercial access</dd></div></dl>
-   <section><h2>Contents (illustrative)</h2><div class="manifest mono"><div><span class="ink">shards/*.jsonl</span><span class="muted">documents, one per line</span></div><div><span class="ink">metadata.json</span><span class="muted">domain tags</span></div><div><span class="ink">splits.json</span><span class="muted">train / eval split</span></div><div><span class="ink">LICENSE</span><span class="muted">applicable agreement</span></div></div></section>
-   <section><h2>Potential ML applications</h2><ul class="lst"><li>Language model training</li><li>Domain adaptation</li><li>Evaluation sets</li></ul></section>
-   <div class="two">
-    <section><h2>Permitted uses (illustrative)</h2><ul class="lst"><li>Model training and evaluation</li><li>Internal research and development</li></ul></section>
-    <section><h2>Restrictions (illustrative)</h2><ul class="lst"><li>Redistribution or resale of the raw data</li><li>Uses outside the applicable agreement</li><li>Final terms vary by dataset and are set in the agreement</li></ul></section>
-   </div>
-   <section><h2>Data source</h2><p style="font-size:14px;max-width:640px">Example only. A real listing would state the origin of the text and the rights covering model training.</p></section>
-  </div>
-  <aside>
-   <h2>Access options</h2>
-   <p style="font-size:14px">Access is arranged by request under the applicable agreement.</p>
-   <p class="small" style="margin-top:8px">Online purchasing is not available yet. This page is structured so a purchase flow can be added later.</p>
-   <a class="btn p" href="#/contact?intent=buy&amp;dataset=specialized-text-corpus">Request Access</a>
-   <p class="small" style="margin-top:16px">Dataset access is subject to the applicable agreement.</p>
-  </aside>
- </div>
-</div>
-</div>
-<div data-view="d:geospatial-imagery" hidden>
-
-<div class="wrap page">
- <a class="back mono" href="#datasets">← All datasets</a>
- <p class="eyebrow" style="margin-top:32px">Computer Vision</p>
- <h1>Geospatial Imagery</h1>
- <p style="margin-top:16px"><span class="tag">Coming Soon</span></p>
- <div class="dgrid">
-  <div>
-   <section><h2>Overview</h2><p class="ink9" style="max-width:640px">A category Parralax intends to support. No dataset is currently available.</p></section>
-   <dl><div><dt>Data type</dt><dd style="font-size:14px">Satellite / aerial images</dd></div><div><dt>Format</dt><dd style="font-size:14px">GeoTIFF</dd></div><div><dt>Approx. size</dt><dd style="font-size:14px">To be determined</dd></div><div><dt>Modality</dt><dd style="font-size:14px">Image</dd></div><div><dt>Labels</dt><dd style="font-size:14px">To be determined.</dd></div><div><dt>License</dt><dd style="font-size:14px">Commercial access</dd></div></dl>
-   <section><h2>Contents (illustrative)</h2><div class="manifest mono"><div><span class="ink">tiles/</span><span class="muted">GeoTIFF tiles</span></div><div><span class="ink">masks/</span><span class="muted">segmentation masks</span></div><div><span class="ink">LICENSE</span><span class="muted">applicable agreement</span></div></div></section>
-   <section><h2>Potential ML applications</h2><ul class="lst"><li>Land-use segmentation</li><li>Aerial object detection</li><li>Change detection</li></ul></section>
-   <div class="two">
-    <section><h2>Permitted uses (illustrative)</h2><ul class="lst"><li>Model training and evaluation</li><li>Internal research and development</li></ul></section>
-    <section><h2>Restrictions (illustrative)</h2><ul class="lst"><li>Redistribution or resale of the raw data</li><li>Uses outside the applicable agreement</li><li>Final terms vary by dataset and are set in the agreement</li></ul></section>
-   </div>
-   <section><h2>Data source</h2><p style="font-size:14px;max-width:640px">No source has been confirmed. This listing is a placeholder.</p></section>
-  </div>
-  <aside>
-   <h2>Access options</h2>
-   <p style="font-size:14px">Not yet available.</p>
-   <p class="small" style="margin-top:8px">Online purchasing is not available yet. This page is structured so a purchase flow can be added later.</p>
-   <a class="btn p" href="#/contact?intent=buy&amp;dataset=geospatial-imagery">Ask About This Dataset</a>
-   <p class="small" style="margin-top:16px">Dataset access is subject to the applicable agreement.</p>
-  </aside>
- </div>
-</div>
-</div>
-<div data-view="contact" hidden>
-<div class="wrap page">
- <p class="eyebrow">Contact</p>
- <h1>Find data. License data.</h1>
- <div class="opts">
-  <div class="opt"><h2>I need data</h2><p>I represent a company looking for data for an ML project.</p><a class="btn o" href="#/contact?intent=buy">Find Data</a></div>
-  <div class="opt"><h2>I have data</h2><p>I represent a company with data that I may be able to license to Parralax.</p><a class="btn o" href="#/contact?intent=license">License My Data</a></div>
- </div>
- 
- <form id="form">
-  
-  <p class="note" id="ds-note" hidden></p>
-  <div><label for="name">Name</label><input id="name" name="name" required autocomplete="name" value=""></div>
-  <div><label for="company">Company</label><input id="company" name="company" autocomplete="organization" value=""></div>
-  <div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email" value=""></div>
-  <fieldset><legend>I am</legend><label class="rad"><input type="radio" name="role" value="Looking for data" checked> Looking for data</label><label class="rad"><input type="radio" name="role" value="Interested in licensing data" > Interested in licensing data</label><label class="rad"><input type="radio" name="role" value="Both" > Both</label></fieldset>
-  <div><label for="message">Message</label><textarea id="message" name="message" rows="6" required></textarea></div>
-  <div><button class="btn p" type="submit">Send</button></div>
-  <p class="small">Sending opens your email app with this message addressed to michaelzhymanov@gmail.com. Nothing is stored on this site.</p>
- </form>
- <p class="muted" style="margin-top:40px;font-size:14px">Or email <a class="ink u" href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a></p>
-</div>
-</div>
-</main>
-<footer><div class="wrap">
- <div class="fgrid">
-  <div><p class="logo ink">PARRALAX</p><p style="margin-top:8px">Data for machine learning.</p><p class="mono accent" style="margin-top:8px;font-size:13px">Models need data. We sell it.</p></div>
-  <nav aria-label="Footer"><ul>
-   <li><a href="#datasets">Datasets</a></li><li><a href="#data-owners">Data Owners</a></li><li><a href="#how-it-works">How It Works</a></li><li><a href="#about">About</a></li><li><a href="#/contact">Contact</a></li>
-  </ul></nav>
-  <div><p>parralax.dev</p><p style="margin-top:8px"><a href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a></p></div>
- </div>
- <p class="small" style="margin-top:40px">Datasets are offered subject to their applicable licensing terms. Dataset access is subject to the applicable agreement.</p>
-</div></footer>
-
-<script>
-(function () {
-  var EMAIL = "michaelzhymanov@gmail.com";
-  var $ = function (s, r) { return (r || document).querySelector(s); };
-  var views = [].slice.call(document.querySelectorAll("[data-view]"));
-  function show(id) { views.forEach(function (v) { v.hidden = v.getAttribute("data-view") !== id; }); }
-
-  // marketplace filtering
-  var F = $("#filters"), rows = $("#rows"), items = [].slice.call(rows.children);
-  function apply() {
-    var q = F.elements.q.value.trim().toLowerCase(), cat = F.elements.category.value, mod = F.elements.modality.value, sort = F.elements.sort.value, n = 0;
-    var key = function (el) { return sort === "title" ? el.dataset.title : el.dataset.cat + el.dataset.title; };
-    items.sort(function (a, b) { return key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0; });
-    items.forEach(function (el) {
-      rows.appendChild(el);
-      var ok = (cat === "All" || el.dataset.cat === cat) && (mod === "All" || el.dataset.mod === mod) && (!q || el.dataset.text.indexOf(q) > -1);
-      el.hidden = !ok; if (ok) n++;
-    });
-    $("#count").textContent = n + " of " + items.length + " listings";
-    $("#none").hidden = n > 0;
-  }
-  F.addEventListener("input", apply);
-  F.addEventListener("change", apply);
-  F.addEventListener("submit", function (e) { e.preventDefault(); apply(); });
-  F.addEventListener("reset", function () { setTimeout(apply, 0); });
-
-  // contact form -> opens the visitor's email app
-  var form = $("#form"), dsName = "";
-  function setRole(r) { [].forEach.call(form.elements.role, function (el) { el.checked = el.value === r; }); }
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var f = new FormData(form), role = f.get("role");
-    var lines = ["Name: " + f.get("name"), "Company: " + f.get("company"), "Email: " + f.get("email"), "I am: " + role];
-    if (dsName) lines.push("Dataset: " + dsName);
-    lines.push("", f.get("message"));
-    location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Parralax inquiry: " + role) + "&body=" + encodeURIComponent(lines.join("\n"));
-  });
-
-  // hash router
-  var HOME_TITLE = document.title;
-  function route() {
-    var h = location.hash || "#/", i = h.indexOf("?");
-    var path = i < 0 ? h : h.slice(0, i), params = new URLSearchParams(i < 0 ? "" : h.slice(i + 1));
-    $(".mm").open = false;
-    var m = path.match(/^#\/dataset\/([\w-]+)$/);
-    if (m) {
-      var v = $('[data-view="d:' + m[1] + '"]');
-      if (v) { show("d:" + m[1]); document.title = $("h1", v).textContent + " | Parralax"; scrollTo(0, 0); return; }
-    }
-    if (path === "#/contact") {
-      show("contact"); document.title = "Contact | Parralax";
-      setRole(params.get("intent") === "license" ? "Interested in licensing data" : "Looking for data");
-      var dv = params.get("dataset") && $('[data-view="d:' + params.get("dataset") + '"]');
-      dsName = dv ? $("h1", dv).textContent : "";
-      $("#ds-note").hidden = !dsName; $("#ds-note").textContent = dsName ? "Regarding dataset: " + dsName : "";
-      if (params.get("intent")) form.scrollIntoView(); else scrollTo(0, 0);
-      return;
-    }
-    show("home"); document.title = HOME_TITLE;
-    var el = path.length > 1 && path.charAt(1) !== "/" ? document.getElementById(path.slice(1)) : null;
-    if (el) el.scrollIntoView(); else scrollTo(0, 0);
-  }
-  addEventListener("hashchange", route);
-  apply(); route();
-})();
-</script>
+  </footer>
 </body>
 </html>
