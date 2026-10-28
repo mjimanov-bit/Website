@@ -9,7 +9,40 @@
 <main><div class="page active" id="home"><section class="shell hero"><h1>The data behind intelligence.</h1><div class="hero-bottom"><p>Parralax develops, curates, and licenses datasets for organizations building artificial intelligence.</p><a class="text-link" data-page="contact" href="#contact">Work with Parralax <span>↗</span></a></div></section><section class="shell section" id="datasets"><div class="section-top"><div><h2>Data built for a purpose.</h2><p>We work from a clear understanding of what a model needs, developing datasets that are structured, documented, and ready for practical use.</p></div></div><div class="offerings"><article class="offering"><h3>Dataset development</h3><p>Custom data collections designed around specific tasks, model objectives, and technical requirements.</p></article><article class="offering"><h3>Data curation</h3><p>Cleaning, organizing, and documenting collections to make them more useful for machine learning workflows.</p></article><article class="offering"><h3>Commercial licensing</h3><p>Access to datasets through clearly defined agreements that establish the scope and terms of use.</p></article></div></section><section class="shell section" id="approach"><div class="section-top"><div><h2>A considered process from source to delivery.</h2></div></div><div class="process"><article><h3>Requirements</h3><p>Establish the intended use, format, and quality criteria.</p></article><article><h3>Collection</h3><p>Identify and assemble relevant data with attention to provenance.</p></article><article><h3>Refinement</h3><p>Clean, structure, and document the resulting collection.</p></article><article><h3>Licensing</h3><p>Provide data under agreed commercial terms.</p></article></div></section><section class="shell section" id="licensing"><div class="licensing"><div><h2>Clear rights.<br/>Useful data.</h2></div><div><p>Datasets are only valuable when teams understand how they can use them. Parralax works with clients to define licensing terms appropriate to each dataset and intended application.</p><a class="text-link" data-page="contact" href="#contact">Discuss a license <span>↗</span></a></div></div></section><section class="bottom-cta"><div class="shell"><h2>Tell us what you're building.</h2><a class="text-link" data-page="contact" href="#contact">Contact Parralax <span>↗</span></a></div></section></div>
 <div class="page" id="contact"><section class="shell contact-hero"><h1>Let's talk data.</h1><p>Looking for a dataset, exploring licensing, or interested in a custom project? Tell us what you have in mind.</p></section><section class="shell contact-grid"><div class="contact-info"><h2>Start a conversation.</h2><p>Share a few details about your organization and what you're looking to build. We'll use that information to understand your inquiry.</p><p>For general inquiries:<br/><a href="mailto:michaelzhymanov@gmail.com">michaelzhymanov@gmail.com</a></p></div><form class="contact-form" id="inquiry-form"><div class="field"><label for="name">Your name *</label><input autocomplete="name" id="name" name="name" required=""/></div><div class="field"><label for="email">Work email *</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div><div class="field"><label for="organization">Organization</label><input autocomplete="organization" id="organization" name="organization"/></div><div class="field"><label for="interest">What are you interested in?</label><select id="interest" name="interest"><option>Custom dataset development</option><option>Existing datasets</option><option>Data licensing</option><option>General inquiry</option></select></div><div class="field"><label for="message">Tell us about your project *</label><textarea id="message" name="message" placeholder="What type of data do you need? What are you building?" required=""></textarea></div><button class="submit" type="submit">Prepare email ↗</button></form></section></div></main>
 <footer class="footer"><div class="shell footer-inner"><a class="logo" data-page="home" href="#home">parralax.</a><span>© 2026 Parralax</span></div></footer><script>
-function showPage(){let isContact=location.hash==='#contact';document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===(isContact?'contact':'home')));if(isContact){window.scrollTo(0,0)}else if(location.hash&&location.hash!=='#home'){requestAnimationFrame(()=>document.querySelector(location.hash)?.scrollIntoView())}else{window.scrollTo(0,0)}}window.addEventListener('hashchange',showPage);showPage();document.getElementById('inquiry-form').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;if(!f.reportValidity())return;const d=new FormData(f);const body=`Name: ${d.get('name')}\nEmail: ${d.get('email')}\nOrganization: ${d.get('organization')}\nInterest: ${d.get('interest')}\n\n${d.get('message')}`;location.href=`mailto:michaelzhymanov@gmail.com?subject=${encodeURIComponent('Parralax inquiry: '+d.get('interest'))}&body=${encodeURIComponent(body)}`});
+function showPage(){
+  let isContact=location.hash==="#contact";
+  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===(isContact?"contact":"home")));
+  if(isContact){window.scrollTo(0,0)}
+  else if(location.hash&&location.hash!=="#home"){requestAnimationFrame(()=>document.querySelector(location.hash)?.scrollIntoView())}
+  else{window.scrollTo(0,0)}
+}
+window.addEventListener("hashchange",showPage);
+showPage();
+
+const form=document.getElementById("inquiry-form");
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!form.reportValidity()) return;
+  const button=form.querySelector("button[type=submit]");
+  const original=button.textContent;
+  button.disabled=true;
+  button.textContent="Sending…";
+
+  try{
+    const response=await fetch("/api/contact",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(Object.fromEntries(new FormData(form)))
+    });
+    const result=await response.json();
+    if(!response.ok) throw new Error(result.error||"The message could not be sent.");
+    form.reset();
+    button.textContent="Sent ✓";
+    setTimeout(()=>{button.textContent=original;button.disabled=false},2500);
+  }catch(error){
+    alert(error.message||"The message could not be sent. Please email michaelzhymanov@gmail.com directly.");
+    button.textContent=original;
+    button.disabled=false;
+  }
+});
 </script></body></html>
-
-
