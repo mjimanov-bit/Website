@@ -1,0 +1,82 @@
+name: Fix contact form
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch-contact-form:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Replace mailto form handler with API handler
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path("index.html")
+          text = path.read_text()
+
+          new_script = '''<script>
+          function showPage(){
+            let isContact=location.hash==="#contact";
+            document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===(isContact?"contact":"home")));
+            if(isContact){window.scrollTo(0,0)}
+            else if(location.hash&&location.hash!=="#home"){requestAnimationFrame(()=>document.querySelector(location.hash)?.scrollIntoView())}
+            else{window.scrollTo(0,0)}
+          }
+          window.addEventListener("hashchange",showPage);
+          showPage();
+
+          const form=document.getElementById("inquiry-form");
+          form.addEventListener("submit",async e=>{
+            e.preventDefault();
+            if(!form.reportValidity()) return;
+            const button=form.querySelector("button[type=submit]");
+            const original=button.textContent;
+            button.disabled=true;
+            button.textContent="Sending…";
+
+            try{
+              const response=await fetch("/api/contact",{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify(Object.fromEntries(new FormData(form)))
+              });
+              const result=await response.json();
+              if(!response.ok) throw new Error(result.error||"The message could not be sent.");
+              form.reset();
+              button.textContent="Sent ✓";
+              setTimeout(()=>{button.textContent=original;button.disabled=false},2500);
+            }catch(error){
+              alert(error.message||"The message could not be sent. Please email michaelzhymanov@gmail.com directly.");
+              button.textContent=original;
+              button.disabled=false;
+            }
+          });
+          </script>'''
+
+          pattern = r'<script>\s*function showPage\(\).*?</script>\s*</body></html>\s*$'
+          patched, count = re.subn(pattern, new_script + "</body></html>\n", text, flags=re.S)
+          if count != 1:
+              raise SystemExit("Could not find the existing contact-form script")
+          path.write_text(patched)
+          PY
+
+      - name: Commit patched form
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git commit -m "Connect contact form to API"
+          git push
